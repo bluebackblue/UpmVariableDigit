@@ -1,71 +1,91 @@
 
 
-/** TestScene.HexToDec
+/** BlueBack.VariableDigit.Samples.HexToDec
 */
 #if(!DEF_BLUEBACK_VARIABLEDIGIT_SAMPLES_DISABLE)
-namespace TestScene.HexToDec
+namespace BlueBack.VariableDigit.Samples.HexToDec
 {
 	/** Main_MonoBehaviour
 	*/
-	public class Main_MonoBehaviour : BlueBack.VariableDigit.InspectorViewer_MonoBehaviour
+	public class Main_MonoBehaviour : UnityEngine.MonoBehaviour
 	{
-		/** hex
+		/** decvalue
 		*/
-		public System.Collections.Generic.LinkedList<int> hex;
+		public System.Collections.Generic.List<DecValue> decvalue;
 
-		/** result
+		/** Awake
 		*/
-		public BlueBack.VariableDigit.DecValue result;
-
-		/** [BlueBack.VariableDigit.InspectorViewer_MonoBehaviour]表示物の取得。
-		*/
-		#if(UNITY_EDITOR)
-		public override BlueBack.VariableDigit.DecValue GetDecValue()
+		private void Awake()
 		{
-			return this.result;
+			this.decvalue = new System.Collections.Generic.List<DecValue>(){null};
 		}
-		#endif
 
 		/** Start
 		*/
 		private void Start()
 		{
-			//「F.ABCDEF」１６進数。
-			{
-				this.hex = new System.Collections.Generic.LinkedList<int>();
-				this.hex.AddLast(15);
-				this.hex.AddLast(10);
-				this.hex.AddLast(11);
-				this.hex.AddLast(12);
-				this.hex.AddLast(13);
-				this.hex.AddLast(14);
-				this.hex.AddLast(15);
-			}
+			#if(UNITY_EDITOR)
+			this.gameObject.AddComponent<BlueBack.VariableDigit.InspectorViewer_MonoBehaviour>().decvalue = this.decvalue;
+			#endif
 
 			//CoroutineMain
 			this.StartCoroutine(this.CoroutineMain());
 		}
-
+		
 		/** CoroutineMain
 		*/
 		private System.Collections.IEnumerator CoroutineMain()
 		{
-			BlueBack.VariableDigit.DecValue t_exponent = BlueBack.VariableDigit.BusyConvert.ToDecValue(1);
-			this.result = BlueBack.VariableDigit.BusyConvert.ToDecValue(0);
+			//「F.ABCDEF」１６進数。
+			System.Collections.Generic.LinkedList<int> t_hexvalue = new System.Collections.Generic.LinkedList<int>();
+			t_hexvalue.AddLast(0xF);
+			t_hexvalue.AddLast(0xA);
+			t_hexvalue.AddLast(0xB);
+			t_hexvalue.AddLast(0xC);
+			t_hexvalue.AddLast(0xD);
+			t_hexvalue.AddLast(0xE);
+			t_hexvalue.AddLast(0xF);
 
-			//0.0625
-			BlueBack.VariableDigit.DecValue t_inverse_16 = new BlueBack.VariableDigit.DecValue(1,-1,new int[]{6,25});
+			BlueBack.VariableDigit.DecValue t_bias = BlueBack.VariableDigit.DecValue.value_1;
+			BlueBack.VariableDigit.DecValue t_16 = BlueBack.VariableDigit.DecValue.value_16;
 
-			System.Collections.Generic.LinkedListNode<int> t_hex_node = this.hex.First;
-			while(t_hex_node != null){
-				BlueBack.VariableDigit.DecValue t_add = BlueBack.VariableDigit.BusyMultiply.Multiply(t_exponent,BlueBack.VariableDigit.BusyConvert.ToDecValue(t_hex_node.Value));
-				this.result = BlueBack.VariableDigit.BusyAddition.Addition(this.result,t_add);
-				t_exponent = BlueBack.VariableDigit.BusyMultiply.Multiply(t_exponent,t_inverse_16);
-				t_hex_node = t_hex_node.Next;
-				yield return null;
+			BlueBack.VariableDigit.DecValue t_calc_bias_inv = BlueBack.VariableDigit.DecValue.value_1;
+
+			DecValue t_decvalue =BlueBack.VariableDigit.DecValue.value_0;
+
+			System.Collections.Generic.LinkedListNode<int> t_hex_node = t_hexvalue.Last;
+
+			do{
+				BlueBack.VariableDigit.DecValue t_add = BlueBack.VariableDigit.BusyMultiply.Multiply(BlueBack.VariableDigit.BusyConvert.ToDecValue(t_hex_node.Value),t_bias);
+				
+				t_decvalue = BlueBack.VariableDigit.BusyAddition.Addition(t_decvalue,t_add);
+
+				t_hex_node = t_hex_node.Previous;
+				if(t_hex_node != null){
+					t_bias = BlueBack.VariableDigit.BusyMultiply.Multiply(t_bias,t_16);
+					t_calc_bias_inv = BlueBack.VariableDigit.BusyMultiply.Multiply(t_calc_bias_inv,BlueBack.VariableDigit.DecValue.value_16_inverse);
+				}else{
+					break;
+				}
+
+				{
+					this.decvalue[0] = t_decvalue;
+					yield return null;
+				}
+			}while(true);
+
+			t_decvalue = BlueBack.VariableDigit.BusyMultiply.Multiply(t_decvalue,t_calc_bias_inv);
+
+			{
+				System.Text.StringBuilder t_stringbuilder = new System.Text.StringBuilder(1024);
+				BlueBack.VariableDigit.BusyConvert.ToStringBuilder(t_decvalue,t_stringbuilder);
+				UnityEngine.Debug.Log(t_stringbuilder.ToString());
 			}
 
-			UnityEngine.Debug.Log(string.Format("{0}",BlueBack.VariableDigit.BusyConvert.ToDouble(this.result,1000)));
+			{
+				this.decvalue[0] = t_decvalue;
+				yield return null;
+			}
 
 			yield break;
 		}
