@@ -28,32 +28,32 @@ namespace TestScene.Addition
 		{
 			//decvalue
 			this.decvalue = new BlueBack.VariableDigit.DecValue[]{
-				//0 + 0
+				//+ 0 + 0 = 0
 				BlueBack.VariableDigit.BusyAddition.Addition(BlueBack.VariableDigit.DecValue.zero,BlueBack.VariableDigit.DecValue.zero),
 
-				//+ 0 + 0.0123
-				BlueBack.VariableDigit.BusyAddition.Addition(BlueBack.VariableDigit.DecValue.zero, new BlueBack.VariableDigit.DecValue(1,-1,new int[]{1,23})),
+				//+ 0 + 0.0123 = 0.0123
+				BlueBack.VariableDigit.BusyAddition.Addition(BlueBack.VariableDigit.DecValue.zero,BlueBack.VariableDigit.BusyConvert.ToDecValue("0.0123")),
 
-				//+ 0.0123 + 0
-				BlueBack.VariableDigit.BusyAddition.Addition(new BlueBack.VariableDigit.DecValue(1,-1,new int[]{1,23}),BlueBack.VariableDigit.DecValue.zero),
+				//+ 0.0123 + 0 = 0.0123
+				BlueBack.VariableDigit.BusyAddition.Addition(BlueBack.VariableDigit.BusyConvert.ToDecValue("0.0123"),BlueBack.VariableDigit.DecValue.zero),
 
-				//+ 0.0123 + 0.000567
-				BlueBack.VariableDigit.BusyAddition.Addition(new BlueBack.VariableDigit.DecValue(1,-1,new int[]{1,23}),new BlueBack.VariableDigit.DecValue(1,-2,new int[]{5,67})),
+				//+ 0.0123 + 0.000567 = 0.012867
+				BlueBack.VariableDigit.BusyAddition.Addition(BlueBack.VariableDigit.BusyConvert.ToDecValue("0.0123"),BlueBack.VariableDigit.BusyConvert.ToDecValue("0.000567")),
 
-				//- 0.0123 - 0.000567
-				BlueBack.VariableDigit.BusyAddition.Addition(new BlueBack.VariableDigit.DecValue(-1,-1,new int[]{1,23}),new BlueBack.VariableDigit.DecValue(-1,-2,new int[]{5,67})),
+				//- 0.0123 - 0.000567 = - 0.012867
+				BlueBack.VariableDigit.BusyAddition.Addition(BlueBack.VariableDigit.BusyConvert.ToDecValue("-0.0123"),BlueBack.VariableDigit.BusyConvert.ToDecValue("-0.000567")),
 
-				//+ 1234 + 0.000567
-				BlueBack.VariableDigit.BusyAddition.Addition(new BlueBack.VariableDigit.DecValue(1,1,new int[]{12,34}),new BlueBack.VariableDigit.DecValue(1,-2,new int[]{5,67})),
+				//+ 1234 + 0.000567 = 1234.000567
+				BlueBack.VariableDigit.BusyAddition.Addition(BlueBack.VariableDigit.BusyConvert.ToDecValue("1234"),BlueBack.VariableDigit.BusyConvert.ToDecValue("0.000567")),
 
-				//+ 9 + 8
-				BlueBack.VariableDigit.BusyAddition.Addition(new BlueBack.VariableDigit.DecValue(1,0,new int[]{9}),new BlueBack.VariableDigit.DecValue(1,0,new int[]{8})),
+				//+ 9 + 8 = 17
+				BlueBack.VariableDigit.BusyAddition.Addition(BlueBack.VariableDigit.BusyConvert.ToDecValue("9"),BlueBack.VariableDigit.BusyConvert.ToDecValue("8")),
 
-				//+ 10000 - 1
-				BlueBack.VariableDigit.BusyAddition.Addition(new BlueBack.VariableDigit.DecValue(1,2,new int[]{1}),new BlueBack.VariableDigit.DecValue(-1,0,new int[]{1})),
+				//+ 10000 - 1 = 9999
+				BlueBack.VariableDigit.BusyAddition.Addition(BlueBack.VariableDigit.BusyConvert.ToDecValue("10000"),BlueBack.VariableDigit.BusyConvert.ToDecValue("-1")),
 
-				//- 10000 + 1
-				BlueBack.VariableDigit.BusyAddition.Addition(new BlueBack.VariableDigit.DecValue(-1,2,new int[]{1}),new BlueBack.VariableDigit.DecValue(1,0,new int[]{1})),
+				//- 10000 + 1 = - 9999
+				BlueBack.VariableDigit.BusyAddition.Addition(BlueBack.VariableDigit.BusyConvert.ToDecValue("-10000"),BlueBack.VariableDigit.BusyConvert.ToDecValue("1")),
 			};
 
 			//CoroutineMain
@@ -65,7 +65,7 @@ namespace TestScene.Addition
 		private System.Collections.IEnumerator CoroutineMain()
 		{
 			for(int ii=0;ii<this.decvalue.Length;ii++){
-				UnityEngine.Debug.Log(string.Format("{0}",BlueBack.VariableDigit.BusyConvert.ToDouble(this.decvalue[ii],1000)));
+				UnityEngine.Debug.Log(string.Format("{0:0.################}",BlueBack.VariableDigit.BusyConvert.ToDouble(this.decvalue[ii],1000)));
 			}
 
 			yield break;

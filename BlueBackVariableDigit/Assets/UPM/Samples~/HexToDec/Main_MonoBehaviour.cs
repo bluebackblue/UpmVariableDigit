@@ -50,34 +50,22 @@ namespace TestScene.HexToDec
 		*/
 		private System.Collections.IEnumerator CoroutineMain()
 		{
+			BlueBack.VariableDigit.DecValue t_exponent = BlueBack.VariableDigit.BusyConvert.ToDecValue(1);
 			this.result = BlueBack.VariableDigit.BusyConvert.ToDecValue(0);
 
-			BlueBack.VariableDigit.DecValue t_bias = BlueBack.VariableDigit.BusyConvert.ToDecValue(1);
-			BlueBack.VariableDigit.DecValue t_16 = BlueBack.VariableDigit.BusyConvert.ToDecValue(16);
+			//0.0625
+			BlueBack.VariableDigit.DecValue t_inverse_16 = new BlueBack.VariableDigit.DecValue(1,-1,new int[]{6,25});
 
-			BlueBack.VariableDigit.DecValue t_calc_bias_inv = BlueBack.VariableDigit.BusyConvert.ToDecValue(1);
-			BlueBack.VariableDigit.DecValue t_calc_16_inv = BlueBack.VariableDigit.BusyConvert.ToDecValue("0.0625");
-
-			System.Collections.Generic.LinkedListNode<int> t_hex_node = this.hex.Last;
-			do{
-				BlueBack.VariableDigit.DecValue t_add = BlueBack.VariableDigit.BusyMultiply.Multiply(BlueBack.VariableDigit.BusyConvert.ToDecValue(t_hex_node.Value),t_bias);
-				
+			System.Collections.Generic.LinkedListNode<int> t_hex_node = this.hex.First;
+			while(t_hex_node != null){
+				BlueBack.VariableDigit.DecValue t_add = BlueBack.VariableDigit.BusyMultiply.Multiply(t_exponent,BlueBack.VariableDigit.BusyConvert.ToDecValue(t_hex_node.Value));
 				this.result = BlueBack.VariableDigit.BusyAddition.Addition(this.result,t_add);
+				t_exponent = BlueBack.VariableDigit.BusyMultiply.Multiply(t_exponent,t_inverse_16);
+				t_hex_node = t_hex_node.Next;
+				yield return null;
+			}
 
-				t_hex_node = t_hex_node.Previous;
-				if(t_hex_node != null){
-					yield return null;
-					t_bias = BlueBack.VariableDigit.BusyMultiply.Multiply(t_bias,t_16);
-					t_calc_bias_inv = BlueBack.VariableDigit.BusyMultiply.Multiply(t_calc_bias_inv,t_calc_16_inv);
-				}else{
-					break;
-				}
-				
-			}while(true);
-
-			this.result = BlueBack.VariableDigit.BusyMultiply.Multiply(this.result,t_calc_bias_inv);
-
-			UnityEngine.Debug.Log(string.Format("{0:0.################}",BlueBack.VariableDigit.BusyConvert.ToDouble(this.result,1000)));
+			UnityEngine.Debug.Log(string.Format("{0}",BlueBack.VariableDigit.BusyConvert.ToDouble(this.result,1000)));
 
 			yield break;
 		}

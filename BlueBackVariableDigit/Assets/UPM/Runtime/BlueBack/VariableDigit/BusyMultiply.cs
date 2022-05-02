@@ -13,7 +13,7 @@ namespace BlueBack.VariableDigit
 {
 	/** BusyMultiply
 	*/
-	public class BusyMultiply
+	public static class BusyMultiply
 	{
 		/** Multiply
 		*/
@@ -74,6 +74,10 @@ namespace BlueBack.VariableDigit
 							t_node_normalize = t_node_prev;
 						}
 					}
+				}
+
+				while((t_result.Count > 1)&&(t_result.Last.Value == 0)){
+					t_result.RemoveLast();
 				}
 
 				if(t_result.First.Value == 0){

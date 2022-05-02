@@ -13,7 +13,7 @@ namespace BlueBack.VariableDigit
 {
 	/** BusyAddition
 	*/
-	public class BusyAddition
+	public static class BusyAddition
 	{
 		/** Addition
 		*/

@@ -13,7 +13,7 @@ namespace BlueBack.VariableDigit
 {
 	/** BusyCompare
 	*/
-	public class BusyCompare
+	public static class BusyCompare
 	{
 		/** Compare
 

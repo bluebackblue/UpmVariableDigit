@@ -32,9 +32,36 @@ namespace BlueBack.VariableDigit
 		*/
 		public System.Collections.Generic.LinkedList<int> list;
 
+		/** Help
+		*/
+		private enum One{Value=1};
+		private enum Two{Value=1};
+		private enum Half{Value=1};
+		private enum SixTeen{Value=1};
+
 		/** zero
 		*/
 		public static readonly DecValue zero = new DecValue();
+
+		/** one
+		*/
+		public static readonly DecValue one = new DecValue(One.Value);
+
+		/** two
+		*/
+		public static readonly DecValue two = new DecValue(Two.Value);
+
+		/** half
+		*/
+		public static readonly DecValue half = new DecValue(Half.Value);
+
+		/** half
+		*/
+		public static readonly DecValue hex = new DecValue(Half.Value);
+
+		/** sixteen
+		*/
+		public static readonly DecValue sixteen = new DecValue(SixTeen.Value);
 
 		/** constructor
 		*/
@@ -49,6 +76,66 @@ namespace BlueBack.VariableDigit
 			//list
 			this.list = new System.Collections.Generic.LinkedList<int>();
 			this.list.AddLast(0);
+		}
+
+		/** constructor
+		*/
+		private DecValue(One a_help)
+		{
+			//sign
+			this.sign = 1;
+
+			//exponent
+			this.exponent = 0;
+
+			//list
+			this.list = new System.Collections.Generic.LinkedList<int>();
+			this.list.AddLast(1);
+		}
+
+		/** constructor
+		*/
+		private DecValue(Two a_help)
+		{
+			//sign
+			this.sign = 1;
+
+			//exponent
+			this.exponent = 0;
+
+			//list
+			this.list = new System.Collections.Generic.LinkedList<int>();
+			this.list.AddLast(2);
+		}
+
+		/** constructor
+		*/
+		private DecValue(Half a_help)
+		{
+			//sign
+			this.sign = 1;
+
+			//exponent
+			this.exponent = -1;
+
+			//list
+			this.list = new System.Collections.Generic.LinkedList<int>();
+			this.list.AddLast(50);
+		}
+
+		/** constructor
+		*/
+		private DecValue(SixTeen a_help)
+		{
+			//sign
+			this.sign = 1;
+
+			//exponent
+			this.exponent = -1;
+
+			//list
+			this.list = new System.Collections.Generic.LinkedList<int>();
+			this.list.AddLast(16);
 		}
 
 		/** constructor

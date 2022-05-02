@@ -38,7 +38,7 @@ namespace TestScene.Multiply
 		private System.Collections.IEnumerator CoroutineMain()
 		{
 			for(int ii=0;ii<this.decvalue.Length;ii++){
-				UnityEngine.Debug.Log(string.Format("{0:0.################}",BlueBack.VariableDigit.BusyConvert.ToDouble(this.decvalue[ii],1000)));
+				UnityEngine.Debug.Log(string.Format("{0}",BlueBack.VariableDigit.BusyConvert.ToDouble(this.decvalue[ii],1000)));
 			}
 
 			yield break;
