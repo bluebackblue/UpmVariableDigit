@@ -1,21 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
+
+/**
+	Copyright (c) blueback
+	Released under the MIT License
+	@brief Busy処理。
+*/
+
+
+/** BlueBack.VariableDigit
+*/
 namespace BlueBack.VariableDigit
 {
-    public class BusyDiv : MonoBehaviour
-    {
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
+	/** BusyDivision
+	*/
+	public static class BusyDivision
+	{
+		/** Division
+		*/
+		public static DecValue Division(DecValue a_1,DecValue a_2)
+		{
+			//TODO:
 
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
-    }
+			return DecValue.value_0;
+		}
+	}
 }
+
