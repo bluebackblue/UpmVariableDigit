@@ -19,18 +19,16 @@ namespace BlueBack.VariableDigit
 		*/
 		public static DecValue Multiply(DecValue a_1,DecValue a_2)
 		{
-			if(a_1.list.Count == 1){
-				if(a_1.list.First.Value == 0){
-					System.Collections.Generic.LinkedList<int> t_result = new System.Collections.Generic.LinkedList<int>();
-					t_result.AddLast(0);
-					return new DecValue(1,0,t_result);
-				}
-			}else if(a_2.list.Count == 1){
-				if(a_2.list.First.Value == 0){
-					System.Collections.Generic.LinkedList<int> t_result = new System.Collections.Generic.LinkedList<int>();
-					t_result.AddLast(0);
-					return new DecValue(1,0,t_result);
-				}
+			if((a_1.exponent == 0)&&(a_1.list.First.Value == 0)){
+				System.Collections.Generic.LinkedList<int> t_result = new System.Collections.Generic.LinkedList<int>();
+				t_result.AddLast(0);
+				return new DecValue(1,0,t_result);
+			}
+			
+			if((a_2.exponent == 0)&&(a_2.list.First.Value == 0)){
+				System.Collections.Generic.LinkedList<int> t_result = new System.Collections.Generic.LinkedList<int>();
+				t_result.AddLast(0);
+				return new DecValue(1,0,t_result);
 			}
 
 			{

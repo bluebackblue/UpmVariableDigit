@@ -339,7 +339,7 @@ namespace BlueBack.VariableDigit
 			
 			DecValue t_value = ToDecValue(((t_bit & 0x8000000000000000UL) == 0) ? (sbyte)1 : (sbyte)-1,(t_bit & 0x000FFFFFFFFFFFFFUL) | 0x0010000000000000UL);
 			long t_exponent = ((long)((t_bit & 0x7FF0000000000000UL) >> 52)) - 1075;
-			DecValue t_pow2exponent = (t_exponent > 0) ? (BusyPow.Pow(DecValue.two,(ulong)t_exponent)) : (BusyPow.Pow(DecValue.half,(ulong)-t_exponent));
+			DecValue t_pow2exponent = (t_exponent > 0) ? (BusyPow.Pow(DecValue.value_2,(ulong)t_exponent)) : (BusyPow.Pow(DecValue.value_2_inverse,(ulong)-t_exponent));
 			t_value = BusyMultiply.Multiply(t_value,t_pow2exponent);
 			return t_value;
 		}

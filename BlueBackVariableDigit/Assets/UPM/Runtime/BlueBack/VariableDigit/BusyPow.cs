@@ -20,7 +20,7 @@ namespace BlueBack.VariableDigit
 		public static DecValue Pow(DecValue a_value,ulong a_count)
 		{
 			DecValue t_value = a_value;
-			DecValue t_result = DecValue.one;
+			DecValue t_result = DecValue.value_0;
 			ulong t_count = a_count;
 
 			while(t_count > 0){

@@ -32,36 +32,22 @@ namespace BlueBack.VariableDigit
 		*/
 		public System.Collections.Generic.LinkedList<int> list;
 
-		/** Help
+		/** Value
 		*/
-		private enum One{Value=1};
-		private enum Two{Value=1};
-		private enum Half{Value=1};
-		private enum SixTeen{Value=1};
+		private enum Value_1{ID=0};
+		private enum Value_2{ID=0};
+		private enum Value_2_Inverse{ID=0};
+		private enum Value_16{ID=0};
+		private enum Value_16_Inverse{ID=0};
 
-		/** zero
+		/** value
 		*/
-		public static readonly DecValue zero = new DecValue();
-
-		/** one
-		*/
-		public static readonly DecValue one = new DecValue(One.Value);
-
-		/** two
-		*/
-		public static readonly DecValue two = new DecValue(Two.Value);
-
-		/** half
-		*/
-		public static readonly DecValue half = new DecValue(Half.Value);
-
-		/** half
-		*/
-		public static readonly DecValue hex = new DecValue(Half.Value);
-
-		/** sixteen
-		*/
-		public static readonly DecValue sixteen = new DecValue(SixTeen.Value);
+		public static readonly DecValue value_0 = new DecValue();
+		public static readonly DecValue value_1 = new DecValue(Value_1.ID);
+		public static readonly DecValue value_2 = new DecValue(Value_2.ID);
+		public static readonly DecValue value_2_inverse = new DecValue(Value_2.ID);
+		public static readonly DecValue value_16 = new DecValue(Value_16.ID);
+		public static readonly DecValue value_16_inverse = new DecValue(Value_16.ID);
 
 		/** constructor
 		*/
@@ -80,7 +66,7 @@ namespace BlueBack.VariableDigit
 
 		/** constructor
 		*/
-		private DecValue(One a_help)
+		private DecValue(Value_1 a_value)
 		{
 			//sign
 			this.sign = 1;
@@ -95,7 +81,7 @@ namespace BlueBack.VariableDigit
 
 		/** constructor
 		*/
-		private DecValue(Two a_help)
+		private DecValue(Value_2 a_value)
 		{
 			//sign
 			this.sign = 1;
@@ -110,7 +96,7 @@ namespace BlueBack.VariableDigit
 
 		/** constructor
 		*/
-		private DecValue(Half a_help)
+		private DecValue(Value_2_Inverse a_value)
 		{
 			//sign
 			this.sign = 1;
@@ -125,7 +111,22 @@ namespace BlueBack.VariableDigit
 
 		/** constructor
 		*/
-		private DecValue(SixTeen a_help)
+		private DecValue(Value_16 a_value)
+		{
+			//sign
+			this.sign = 1;
+
+			//exponent
+			this.exponent = 0;
+
+			//list
+			this.list = new System.Collections.Generic.LinkedList<int>();
+			this.list.AddLast(16);
+		}
+
+		/** constructor
+		*/
+		private DecValue(Value_16_Inverse a_value)
 		{
 			//sign
 			this.sign = 1;
@@ -135,7 +136,8 @@ namespace BlueBack.VariableDigit
 
 			//list
 			this.list = new System.Collections.Generic.LinkedList<int>();
-			this.list.AddLast(16);
+			this.list.AddLast(6);
+			this.list.AddLast(25);
 		}
 
 		/** constructor

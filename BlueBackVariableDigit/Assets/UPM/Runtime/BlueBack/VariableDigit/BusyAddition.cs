@@ -103,6 +103,10 @@ namespace BlueBack.VariableDigit
 					t_result.RemoveFirst();
 					t_exponent_base--;
 				}
+
+				while((t_result.Count > 1)&&(t_result.Last.Value == 0)){
+					t_result.RemoveLast();
+				}
 			}
 
 			return new DecValue(t_sign,t_exponent_base + 1,t_result);

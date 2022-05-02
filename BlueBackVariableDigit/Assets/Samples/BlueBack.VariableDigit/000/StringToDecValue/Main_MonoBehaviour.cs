@@ -1,9 +1,9 @@
 
 
-/** TestScene.StringToDecValue
+/** BlueBack.VariableDigit.Samples.StringToDecValue
 */
 #if(!DEF_BLUEBACK_VARIABLEDIGIT_SAMPLES_DISABLE)
-namespace TestScene.StringToDecValue
+namespace BlueBack.VariableDigit.Samples.StringToDecValue
 {
 	/** Main_MonoBehaviour
 	*/
