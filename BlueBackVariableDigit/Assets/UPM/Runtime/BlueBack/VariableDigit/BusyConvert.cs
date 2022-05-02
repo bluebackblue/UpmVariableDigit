@@ -15,107 +15,98 @@ namespace BlueBack.VariableDigit
 	*/
 	public static class BusyConvert
 	{
-		/** ToDouble
+		/** [DecValue]を[StringBuilder]にコンバート。
 		*/
-		public static double ToDouble(DecValue a_value,int a_limit)
+		public static void ToStringBuilder(DecValue a_value,System.Text.StringBuilder a_out_stringbuffer)
 		{
-			double t_result = 0d;
-
+			a_out_stringbuffer.Clear();
 			{
-				int t_exponent = 0;
+				switch(a_value.sign){
+				case -1:
+					{
+						a_out_stringbuffer.Append('-');
+					}break;
+				}
 
 				System.Collections.Generic.LinkedListNode<int> t_node = a_value.list.First;
-				for(int ii=0;((ii<a_limit)&&(t_node != null));ii++){
-					t_result += t_node.Value * System.Math.Pow(100,t_exponent);
-					t_exponent--;
-					t_node = t_node.Next;
-				}
-			}
-
-			t_result *= a_value.sign * System.Math.Pow(100,a_value.exponent);
-
-			return t_result;
-		}
-
-		/** ToDecValue
-		*/
-		public static DecValue ToDecValue(long a_value)
-		{
-			//sign
-			sbyte t_sign = (a_value >= 0) ? ((sbyte)1) : ((sbyte)-1);
-
-			//value
-			ulong t_value = (ulong)(a_value * t_sign);
-
-			//exponent
-			long t_exponent = ((t_value == 0) ? (0) : (long)System.Math.Log(t_value,100));
-
-			//list
-			System.Collections.Generic.LinkedList<int> t_list = new System.Collections.Generic.LinkedList<int>();
-			if(t_value == 0){
-				t_list.AddFirst(0);
-			}else{
-				bool t_first = true;
-
-				while(t_value > 0){
-					ulong t_mod = t_value % 100;
-
-					if(t_first == true){
-						if(t_mod == 0){
-							t_value /= 100;
-							continue;
-						}
-						t_first = false;
+				
+				long t_exponent = a_value.exponent;
+				if(t_exponent >= 0){
+					//整数部あり。
+					{
+						int t_value = t_node.Value;
+						a_out_stringbuffer.Append(t_value);
+						t_node = t_node.Next;
+						t_exponent--;
 					}
 
-					t_list.AddFirst((int)t_mod);
-					t_value /= 100;
-				}
-			}
+					while(t_exponent >= 0){
+						if(t_node != null){
+							int t_value = t_node.Value;
+							if(t_value < 10){
+								a_out_stringbuffer.Append('0');
+								a_out_stringbuffer.Append(t_value);
+							}else{
+								a_out_stringbuffer.Append(t_value);
+							}
 
-			return new DecValue(t_sign,t_exponent,t_list);
-		}
-
-		/** ToDecValue
-		*/
-		public static DecValue ToDecValue(sbyte a_sign,ulong a_value)
-		{
-			//sign
-			sbyte t_sign = a_sign;
-
-			//value
-			ulong t_value = a_value;
-
-			//exponent
-			long t_exponent = ((t_value == 0) ? (0) : (long)System.Math.Log(t_value,100));
-
-			//list
-			System.Collections.Generic.LinkedList<int> t_list = new System.Collections.Generic.LinkedList<int>();
-			if(t_value == 0){
-				t_list.AddFirst(0);
-			}else{
-				bool t_first = true;
-
-				while(t_value > 0){
-					ulong t_mod = t_value % 100;
-
-					if(t_first == true){
-						if(t_mod == 0){
-							t_value /= 100;
-							continue;
+							t_node = t_node.Next;
+						}else{
+							//ゼロ埋め。
+							a_out_stringbuffer.Append("00");
 						}
-						t_first = false;
+
+						t_exponent--;
 					}
 
-					t_list.AddFirst((int)t_mod);
-					t_value /= 100;
+					//小数部もあり。
+					if(t_node != null){
+						a_out_stringbuffer.Append(".");
+					}
+				}else{
+					//整数部なし。
+					a_out_stringbuffer.Append("0.");
+				}
+
+				//小数部。
+				if(t_node != null){
+
+					//ゼロ埋め。
+					while(t_exponent < -1){
+						a_out_stringbuffer.Append("00");
+						t_exponent++;
+					}
+
+					while(t_node != null){
+						int t_value = t_node.Value;
+						if(t_node == a_value.list.Last){
+							if(t_value < 10){
+								a_out_stringbuffer.Append('0');
+								a_out_stringbuffer.Append(t_value);
+							}else{
+								int t_value_div10 = t_value / 10;
+								if(t_value != (t_value_div10 * 10)){
+									a_out_stringbuffer.Append(t_value);
+								}else{
+									//小数部最後の下位１桁が０の場合は省略する。
+									a_out_stringbuffer.Append(t_value_div10);
+								}
+							}
+						}else{
+							if(t_value < 10){
+								a_out_stringbuffer.Append('0');
+								a_out_stringbuffer.Append(t_value);
+							}else{
+								a_out_stringbuffer.Append(t_value);
+							}
+						}
+						t_node = t_node.Next;
+					}
 				}
 			}
-
-			return new DecValue(t_sign,t_exponent,t_list);
 		}
 
-		/** ToDecValue
+		/** [string]を[DecValue]にコンバート。
 		*/
 		public static DecValue ToDecValue(string a_value)
 		{
@@ -251,7 +242,96 @@ namespace BlueBack.VariableDigit
 			return new DecValue(t_sign,t_exponent,t_result);
 		}
 
-		/** ToDecValue
+		/** [long]を[DecValue]にコンバート。
+		*/
+		public static DecValue ToDecValue(long a_value)
+		{
+			//sign
+			sbyte t_sign = (a_value >= 0) ? ((sbyte)1) : ((sbyte)-1);
+
+			//value
+			ulong t_value = (ulong)(a_value * t_sign);
+
+			//exponent
+			long t_exponent = ((t_value == 0) ? (0) : (long)System.Math.Log(t_value,100));
+
+			//list
+			System.Collections.Generic.LinkedList<int> t_list = new System.Collections.Generic.LinkedList<int>();
+			if(t_value == 0){
+				t_list.AddFirst(0);
+			}else{
+				bool t_first = true;
+				while(t_value > 0){
+					ulong t_mod = t_value % 100;
+					if(t_first == true){
+						if(t_mod == 0){
+							t_value /= 100;
+							continue;
+						}
+						t_first = false;
+					}
+					t_list.AddFirst((int)t_mod);
+					t_value /= 100;
+				}
+			}
+
+			return new DecValue(t_sign,t_exponent,t_list);
+		}
+
+		/** [ulong]を[DecValue]にコンバート。
+		*/
+		public static DecValue ToDecValue(sbyte a_sign,ulong a_value)
+		{
+			#pragma warning disable 0162
+			switch(a_sign){
+			case 1:
+			case -1:
+				{
+					//sign
+					sbyte t_sign = a_sign;
+
+					//value
+					ulong t_value = a_value;
+
+					//exponent
+					long t_exponent = ((t_value == 0) ? (0) : (long)System.Math.Log(t_value,100));
+
+					//list
+					System.Collections.Generic.LinkedList<int> t_list = new System.Collections.Generic.LinkedList<int>();
+					if(t_value == 0){
+						t_list.AddFirst(0);
+					}else{
+						bool t_first = true;
+
+						while(t_value > 0){
+							ulong t_mod = t_value % 100;
+
+							if(t_first == true){
+								if(t_mod == 0){
+									t_value /= 100;
+									continue;
+								}
+								t_first = false;
+							}
+
+							t_list.AddFirst((int)t_mod);
+							t_value /= 100;
+						}
+					}
+
+					return new DecValue(t_sign,t_exponent,t_list);
+				}break;
+			default:
+				{
+					DebugTool.Assert(false,string.Format("sign = {0}",a_sign));
+					return new DecValue();
+				}break;
+			}
+			#pragma warning restore
+		}
+
+
+		/** [double]を[DecValue]にコンバート。
 		*/
 		public static DecValue ToDecValue(double a_value)
 		{
@@ -262,6 +342,30 @@ namespace BlueBack.VariableDigit
 			DecValue t_pow2exponent = (t_exponent > 0) ? (BusyPow.Pow(DecValue.two,(ulong)t_exponent)) : (BusyPow.Pow(DecValue.half,(ulong)-t_exponent));
 			t_value = BusyMultiply.Multiply(t_value,t_pow2exponent);
 			return t_value;
+		}
+
+		/** [DevValue]を[double]にコンバート。
+
+			a_limit : ループ回数に制限。
+
+		*/
+		public static double ToDoubleWithLimit(DecValue a_value,int a_limit = 100)
+		{
+			double t_result = 0d;
+
+			{
+				double t_pow100exponent = System.Math.Pow(100,a_value.exponent);
+								System.Collections.Generic.LinkedListNode<int> t_node = a_value.list.First;
+				for(int ii=0;((ii<a_limit)&&(t_node != null));ii++){
+					t_result += t_pow100exponent;
+					t_pow100exponent *= 0.01d;
+					t_node = t_node.Next;
+				}
+			}
+
+			t_result *= a_value.sign;
+
+			return t_result;
 		}
 	}
 }

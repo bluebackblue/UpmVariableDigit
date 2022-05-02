@@ -2,7 +2,7 @@
 
 /** TestScene.Convert
 */
-#if(!DEF_BLUEBACK_VARIABLEDIGIT_SAMPLES_DISABLE)
+#if(!DEF_BLUEBACK_VARIABLEDIGIT_SAMPLES_DISABLE) && false
 namespace TestScene.Convert
 {
 	/** Main_MonoBehaviour
@@ -79,8 +79,10 @@ namespace TestScene.Convert
 		*/
 		private System.Collections.IEnumerator CoroutineMain()
 		{
+			System.Text.StringBuilder t_stringbuilder = new System.Text.StringBuilder(1024);
 			for(int ii=0;ii<this.decvalue.Length;ii++){
-				UnityEngine.Debug.Log(string.Format("{0:0.################}",BlueBack.VariableDigit.BusyConvert.ToDouble(this.decvalue[ii],1000)));
+				BlueBack.VariableDigit.BusyConvert.ToStringBuilder(this.decvalue[ii],t_stringbuilder);
+				UnityEngine.Debug.Log(t_stringbuilder.ToString());
 			}
 
 			yield break;

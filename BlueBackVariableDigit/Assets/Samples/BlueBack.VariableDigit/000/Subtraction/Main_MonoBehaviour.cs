@@ -1,9 +1,9 @@
 
 
-/** TestScene.Multiply
+/** TestScene.Subtraction
 */
 #if(!DEF_BLUEBACK_VARIABLEDIGIT_SAMPLES_DISABLE) && false
-namespace TestScene.Multiply
+namespace TestScene.Subtraction
 {
 	/** Main_MonoBehaviour
 	*/
@@ -19,14 +19,14 @@ namespace TestScene.Multiply
 		{
 			//decvalue
 			this.decvalue = new BlueBack.VariableDigit.DecValue[]{
-				//0.0123 x 0.0156
-				BlueBack.VariableDigit.BusyMultiply.Multiply(new BlueBack.VariableDigit.DecValue(1,-1,new int[]{1,23}),new BlueBack.VariableDigit.DecValue(1,-1,new int[]{4,56})),
+				//0 - 0
+				BlueBack.VariableDigit.BusySubtraction.Subtraction(BlueBack.VariableDigit.BusyConvert.ToDecValue("0"),BlueBack.VariableDigit.BusyConvert.ToDecValue("0")),
 
-				//0.0123 x 0
-				BlueBack.VariableDigit.BusyMultiply.Multiply(new BlueBack.VariableDigit.DecValue(1,-1,new int[]{1,2,3}),BlueBack.VariableDigit.DecValue.zero),
+				//0.1 - 10.0123
+				BlueBack.VariableDigit.BusySubtraction.Subtraction(BlueBack.VariableDigit.BusyConvert.ToDecValue("0.1"),BlueBack.VariableDigit.BusyConvert.ToDecValue("10.0123")),
 
-				//0 x 0.0123
-				BlueBack.VariableDigit.BusyMultiply.Multiply(BlueBack.VariableDigit.DecValue.zero,new BlueBack.VariableDigit.DecValue(1,-1,new int[]{1,2,3})),
+				//10.0123 - 0.1
+				BlueBack.VariableDigit.BusySubtraction.Subtraction(BlueBack.VariableDigit.BusyConvert.ToDecValue("10.0123"),BlueBack.VariableDigit.BusyConvert.ToDecValue("0.1")),
 			};
 
 			//CoroutineMain

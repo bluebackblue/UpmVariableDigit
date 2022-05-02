@@ -61,23 +61,11 @@ namespace BlueBack.VariableDigit.Editor
 
 			UnityEditor.EditorGUILayout.Space(18);
 
-			//シングル。
-			{
-				BlueBack.VariableDigit.DecValue t_jsonitem = t_this.GetDecValue();
-				if(t_jsonitem != null){
-					this.Draw("s",t_jsonitem);
+			if(t_this.decvalue != null){
+				int ii_max = t_this.decvalue.Count;
+				for(int ii=0;ii<ii_max;ii++){
+					this.Draw(ii.ToString(),t_this.decvalue[ii]);
 					UnityEditor.EditorGUILayout.Space(18);
-				}
-			}
-
-			//マルチ。
-			{
-				BlueBack.VariableDigit.DecValue[] t_jsonitem_list = t_this.GetMultiDecValue();
-				if(t_jsonitem_list != null){
-					for(int ii=0;ii<t_jsonitem_list.Length;ii++){
-						this.Draw(ii.ToString(),t_jsonitem_list[ii]);
-						UnityEditor.EditorGUILayout.Space(18);
-					}
 				}
 			}
 		}

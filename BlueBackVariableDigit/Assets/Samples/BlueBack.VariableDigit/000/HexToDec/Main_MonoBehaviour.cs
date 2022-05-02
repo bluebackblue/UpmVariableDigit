@@ -2,7 +2,7 @@
 
 /** TestScene.HexToDec
 */
-#if(!DEF_BLUEBACK_VARIABLEDIGIT_SAMPLES_DISABLE)
+#if(!DEF_BLUEBACK_VARIABLEDIGIT_SAMPLES_DISABLE) && false
 namespace TestScene.HexToDec
 {
 	/** Main_MonoBehaviour
@@ -77,7 +77,11 @@ namespace TestScene.HexToDec
 
 			this.result = BlueBack.VariableDigit.BusyMultiply.Multiply(this.result,t_calc_bias_inv);
 
-			UnityEngine.Debug.Log(string.Format("{0:0.################}",BlueBack.VariableDigit.BusyConvert.ToDouble(this.result,1000)));
+			{
+				System.Text.StringBuilder t_stringbuilder = new System.Text.StringBuilder(1024);
+				BlueBack.VariableDigit.BusyConvert.ToStringBuilder(this.result,t_stringbuilder);
+				UnityEngine.Debug.Log(t_stringbuilder.ToString());
+			}
 
 			yield break;
 		}
