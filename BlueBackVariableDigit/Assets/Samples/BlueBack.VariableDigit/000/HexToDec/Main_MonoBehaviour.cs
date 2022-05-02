@@ -46,13 +46,12 @@ namespace BlueBack.VariableDigit.Samples.HexToDec
 			t_hexvalue.AddLast(0xE);
 			t_hexvalue.AddLast(0xF);
 
-			BlueBack.VariableDigit.DecValue t_bias = BlueBack.VariableDigit.BusyConvert.ToDecValue(1);
-			BlueBack.VariableDigit.DecValue t_16 = BlueBack.VariableDigit.BusyConvert.ToDecValue(16);
+			BlueBack.VariableDigit.DecValue t_bias = BlueBack.VariableDigit.DecValue.value_1;
+			BlueBack.VariableDigit.DecValue t_16 = BlueBack.VariableDigit.DecValue.value_16;
 
-			BlueBack.VariableDigit.DecValue t_calc_bias_inv = BlueBack.VariableDigit.BusyConvert.ToDecValue(1);
-			BlueBack.VariableDigit.DecValue t_calc_16_inv = BlueBack.VariableDigit.BusyConvert.ToDecValue("0.0625");
+			BlueBack.VariableDigit.DecValue t_calc_bias_inv = BlueBack.VariableDigit.DecValue.value_1;
 
-			DecValue t_decvalue = BlueBack.VariableDigit.BusyConvert.ToDecValue(0);
+			DecValue t_decvalue =BlueBack.VariableDigit.DecValue.value_0;
 
 			System.Collections.Generic.LinkedListNode<int> t_hex_node = t_hexvalue.Last;
 
@@ -64,7 +63,7 @@ namespace BlueBack.VariableDigit.Samples.HexToDec
 				t_hex_node = t_hex_node.Previous;
 				if(t_hex_node != null){
 					t_bias = BlueBack.VariableDigit.BusyMultiply.Multiply(t_bias,t_16);
-					t_calc_bias_inv = BlueBack.VariableDigit.BusyMultiply.Multiply(t_calc_bias_inv,t_calc_16_inv);
+					t_calc_bias_inv = BlueBack.VariableDigit.BusyMultiply.Multiply(t_calc_bias_inv,BlueBack.VariableDigit.DecValue.value_16_inverse);
 				}else{
 					break;
 				}
