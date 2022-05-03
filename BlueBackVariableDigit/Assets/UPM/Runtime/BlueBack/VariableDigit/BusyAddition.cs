@@ -22,8 +22,8 @@ namespace BlueBack.VariableDigit
 			long t_exponent_base = ((a_1.exponent > a_2.exponent) ? (a_1.exponent) : (a_2.exponent));
 
 			//node
-			System.Collections.Generic.LinkedListNode<int> t_node_1 = a_1.list.First;
-			System.Collections.Generic.LinkedListNode<int> t_node_2 = a_2.list.First;
+			System.Collections.Generic.LinkedListNode<int> t_node_1 = a_1.mantissa.First;
+			System.Collections.Generic.LinkedListNode<int> t_node_2 = a_2.mantissa.First;
 
 			//reaults
 			System.Collections.Generic.LinkedList<int> t_result = new System.Collections.Generic.LinkedList<int>();

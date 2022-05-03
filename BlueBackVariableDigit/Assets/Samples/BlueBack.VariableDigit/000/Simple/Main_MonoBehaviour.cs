@@ -46,8 +46,8 @@ namespace BlueBack.VariableDigit.Samples.Simple
 		{
 			System.Text.StringBuilder t_stringbuilder = new System.Text.StringBuilder(1024);
 			for(int ii=0;ii<this.decvalue.Count;ii++){
-				BlueBack.VariableDigit.BusyConvert.ToStringBuilder(this.decvalue[ii],t_stringbuilder);
-				UnityEngine.Debug.Log(t_stringbuilder.ToString());
+				BlueBack.VariableDigit.BusyConvert.ToStringBuilderWithLimit(this.decvalue[ii],t_stringbuilder,1000);
+				UnityEngine.Debug.Log(string.Format("{0}",t_stringbuilder));
 			}
 
 			yield break;

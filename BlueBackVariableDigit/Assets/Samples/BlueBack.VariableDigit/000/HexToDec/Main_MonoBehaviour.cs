@@ -78,8 +78,8 @@ namespace BlueBack.VariableDigit.Samples.HexToDec
 
 			{
 				System.Text.StringBuilder t_stringbuilder = new System.Text.StringBuilder(1024);
-				BlueBack.VariableDigit.BusyConvert.ToStringBuilder(t_decvalue,t_stringbuilder);
-				UnityEngine.Debug.Log(t_stringbuilder.ToString());
+				BlueBack.VariableDigit.BusyConvert.ToStringBuilderWithLimit(t_decvalue,t_stringbuilder,1000);
+				UnityEngine.Debug.Log(string.Format("{0}",t_stringbuilder));
 			}
 
 			{

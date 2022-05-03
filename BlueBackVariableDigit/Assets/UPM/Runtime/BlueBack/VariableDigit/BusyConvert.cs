@@ -17,7 +17,7 @@ namespace BlueBack.VariableDigit
 	{
 		/** [DecValue]を[StringBuilder]にコンバート。
 		*/
-		public static void ToStringBuilder(DecValue a_value,System.Text.StringBuilder a_out_stringbuffer)
+		public static void ToStringBuilderWithLimit(DecValue a_value,System.Text.StringBuilder a_out_stringbuffer,int a_limit)
 		{
 			a_out_stringbuffer.Clear();
 			{
@@ -28,7 +28,7 @@ namespace BlueBack.VariableDigit
 					}break;
 				}
 
-				System.Collections.Generic.LinkedListNode<int> t_node = a_value.list.First;
+				System.Collections.Generic.LinkedListNode<int> t_node = a_value.mantissa.First;
 				
 				long t_exponent = a_value.exponent;
 				if(t_exponent >= 0){
@@ -56,6 +56,12 @@ namespace BlueBack.VariableDigit
 							a_out_stringbuffer.Append("00");
 						}
 
+						//リミット。
+						if(a_out_stringbuffer.Length > a_limit){
+							a_out_stringbuffer.Append("***");
+							return;
+						}
+
 						t_exponent--;
 					}
 
@@ -79,7 +85,7 @@ namespace BlueBack.VariableDigit
 
 					while(t_node != null){
 						int t_value = t_node.Value;
-						if(t_node == a_value.list.Last){
+						if(t_node == a_value.mantissa.Last){
 							if(t_value < 10){
 								a_out_stringbuffer.Append('0');
 								a_out_stringbuffer.Append(t_value);
@@ -100,6 +106,13 @@ namespace BlueBack.VariableDigit
 								a_out_stringbuffer.Append(t_value);
 							}
 						}
+
+						//リミット。
+						if(a_out_stringbuffer.Length > a_limit){
+							a_out_stringbuffer.Append("***");
+							return;
+						}
+
 						t_node = t_node.Next;
 					}
 				}
@@ -151,7 +164,6 @@ namespace BlueBack.VariableDigit
 				t_index_f_max = -1;
 			}
 
-
 			//exponent
 			long t_exponent;
 			{
@@ -193,13 +205,6 @@ namespace BlueBack.VariableDigit
 
 					t_result.AddLast(t_value_10 * 10 + t_value_01);
 				}while(true);
-
-				//正規化。
-				{
-					while((t_result.Count > 0)&&(t_result.Last.Value == 0)){
-						t_result.RemoveLast();
-					}
-				}
 			}
 
 			//整数。
@@ -229,13 +234,17 @@ namespace BlueBack.VariableDigit
 
 					t_result.AddFirst(t_value_10 * 10 + t_value_01);
 				}while(true);
+			}
 
-				//正規化。
-				{
-					while((t_result.Count > 1)&&(t_result.First.Value == 0)){
-						t_result.RemoveFirst();
-						t_exponent--;
-					}
+			//正規化。
+			{
+				while((t_result.Count > 1)&&(t_result.First.Value == 0)){
+					t_result.RemoveFirst();
+					t_exponent--;
+				}
+
+				while((t_result.Count > 1)&&(t_result.Last.Value == 0)){
+					t_result.RemoveLast();
 				}
 			}
 
@@ -355,7 +364,7 @@ namespace BlueBack.VariableDigit
 
 			{
 				double t_pow100exponent = System.Math.Pow(100,a_value.exponent);
-								System.Collections.Generic.LinkedListNode<int> t_node = a_value.list.First;
+								System.Collections.Generic.LinkedListNode<int> t_node = a_value.mantissa.First;
 				for(int ii=0;((ii<a_limit)&&(t_node != null));ii++){
 					t_result += t_pow100exponent;
 					t_pow100exponent *= 0.01d;

@@ -30,7 +30,7 @@ namespace BlueBack.VariableDigit
 			 数値 : sign * pow(100,exponent) * AA.BBCC***
 
 		*/
-		public System.Collections.Generic.LinkedList<int> list;
+		public System.Collections.Generic.LinkedList<int> mantissa;
 
 		/** Value
 		*/
@@ -47,7 +47,7 @@ namespace BlueBack.VariableDigit
 		public static readonly DecValue value_2 = new DecValue(Value_2.ID);
 		public static readonly DecValue value_2_inverse = new DecValue(Value_2.ID);
 		public static readonly DecValue value_16 = new DecValue(Value_16.ID);
-		public static readonly DecValue value_16_inverse = new DecValue(Value_16.ID);
+		public static readonly DecValue value_16_inverse = new DecValue(Value_16_Inverse.ID);
 
 		/** constructor
 		*/
@@ -59,9 +59,23 @@ namespace BlueBack.VariableDigit
 			//exponent
 			this.exponent = 0;
 
-			//list
-			this.list = new System.Collections.Generic.LinkedList<int>();
-			this.list.AddLast(0);
+			//mantissa
+			this.mantissa = new System.Collections.Generic.LinkedList<int>();
+			this.mantissa.AddLast(0);
+		}
+
+		/** constructor
+		*/
+		public DecValue(DecValue a_value)
+		{
+			//sign
+			this.sign = a_value.sign;
+
+			//exponent
+			this.exponent = a_value.exponent;
+
+			//mantissa
+			this.mantissa = new System.Collections.Generic.LinkedList<int>(a_value.mantissa);
 		}
 
 		/** constructor
@@ -74,9 +88,9 @@ namespace BlueBack.VariableDigit
 			//exponent
 			this.exponent = 0;
 
-			//list
-			this.list = new System.Collections.Generic.LinkedList<int>();
-			this.list.AddLast(1);
+			//mantissa
+			this.mantissa = new System.Collections.Generic.LinkedList<int>();
+			this.mantissa.AddLast(1);
 		}
 
 		/** constructor
@@ -89,9 +103,9 @@ namespace BlueBack.VariableDigit
 			//exponent
 			this.exponent = 0;
 
-			//list
-			this.list = new System.Collections.Generic.LinkedList<int>();
-			this.list.AddLast(2);
+			//mantissa
+			this.mantissa = new System.Collections.Generic.LinkedList<int>();
+			this.mantissa.AddLast(2);
 		}
 
 		/** constructor
@@ -104,9 +118,9 @@ namespace BlueBack.VariableDigit
 			//exponent
 			this.exponent = -1;
 
-			//list
-			this.list = new System.Collections.Generic.LinkedList<int>();
-			this.list.AddLast(50);
+			//mantissa
+			this.mantissa = new System.Collections.Generic.LinkedList<int>();
+			this.mantissa.AddLast(50);
 		}
 
 		/** constructor
@@ -119,9 +133,9 @@ namespace BlueBack.VariableDigit
 			//exponent
 			this.exponent = 0;
 
-			//list
-			this.list = new System.Collections.Generic.LinkedList<int>();
-			this.list.AddLast(16);
+			//mantissa
+			this.mantissa = new System.Collections.Generic.LinkedList<int>();
+			this.mantissa.AddLast(16);
 		}
 
 		/** constructor
@@ -134,10 +148,10 @@ namespace BlueBack.VariableDigit
 			//exponent
 			this.exponent = -1;
 
-			//list
-			this.list = new System.Collections.Generic.LinkedList<int>();
-			this.list.AddLast(6);
-			this.list.AddLast(25);
+			//mantissa
+			this.mantissa = new System.Collections.Generic.LinkedList<int>();
+			this.mantissa.AddLast(6);
+			this.mantissa.AddLast(25);
 		}
 
 		/** constructor
@@ -154,8 +168,8 @@ namespace BlueBack.VariableDigit
 			//exponent
 			this.exponent = a_exponent;
 
-			//list
-			this.list = new System.Collections.Generic.LinkedList<int>(a_list);
+			//mantissa
+			this.mantissa = new System.Collections.Generic.LinkedList<int>(a_list);
 		}
 
 		/** constructor
@@ -172,8 +186,17 @@ namespace BlueBack.VariableDigit
 			//exponent
 			this.exponent = a_exponent;
 
-			//list
-			this.list = a_list;
+			//mantissa
+			this.mantissa = a_list;
+		}
+
+		/** CutMantissa
+		*/
+		public void CutMantissa(int a_limit)
+		{
+			while(this.mantissa.Count > a_limit){
+				this.mantissa.RemoveLast();
+			}
 		}
 	}
 }

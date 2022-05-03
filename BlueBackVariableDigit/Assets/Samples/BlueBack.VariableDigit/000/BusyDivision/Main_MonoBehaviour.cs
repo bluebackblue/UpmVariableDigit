@@ -1,9 +1,9 @@
 
 
-/** BlueBack.VariableDigit.Samples.Simple
+/** BlueBack.VariableDigit.Samples.BusyDivision
 */
 #if(!DEF_BLUEBACK_VARIABLEDIGIT_SAMPLES_DISABLE)
-namespace BlueBack.VariableDigit.Samples.Simple
+namespace BlueBack.VariableDigit.Samples.BusyDivision
 {
 	/** Main_MonoBehaviour
 	*/
@@ -19,12 +19,12 @@ namespace BlueBack.VariableDigit.Samples.Simple
 		{
 			this.decvalue = new System.Collections.Generic.List<BlueBack.VariableDigit.DecValue>(){
 
-				BlueBack.VariableDigit.DecValue.value_0,
-				BlueBack.VariableDigit.DecValue.value_1,
-				BlueBack.VariableDigit.DecValue.value_2,
-				BlueBack.VariableDigit.DecValue.value_2_inverse,
-				BlueBack.VariableDigit.DecValue.value_16,
-				BlueBack.VariableDigit.DecValue.value_16_inverse,
+				//0 + 0 = 0
+				BlueBack.VariableDigit.BusyDivision.DivisionWithLimit(BlueBack.VariableDigit.BusyConvert.ToDecValue("0"),			BlueBack.VariableDigit.BusyConvert.ToDecValue("0"),			100),
+
+				//0 + 0 = 0
+				BlueBack.VariableDigit.BusyDivision.DivisionWithLimit(BlueBack.VariableDigit.BusyConvert.ToDecValue("1"),			BlueBack.VariableDigit.BusyConvert.ToDecValue("16"),		100),
+
 			};
 		}
 

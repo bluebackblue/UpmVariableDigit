@@ -58,7 +58,7 @@ namespace BlueBack.VariableDigit.Samples.BusyMultiply
 				//-99 * 88 = -8712
 				BlueBack.VariableDigit.BusyMultiply.Multiply(BlueBack.VariableDigit.BusyConvert.ToDecValue("-99"),			BlueBack.VariableDigit.BusyConvert.ToDecValue("88")),
 
-				//50 * 2
+				//50 * 2 = 100
 				BlueBack.VariableDigit.BusyMultiply.Multiply(BlueBack.VariableDigit.BusyConvert.ToDecValue("50"),			BlueBack.VariableDigit.BusyConvert.ToDecValue("2")),
 
 				//3000.0003 * 200.002 = 600006.0600006
@@ -90,8 +90,8 @@ namespace BlueBack.VariableDigit.Samples.BusyMultiply
 		{
 			System.Text.StringBuilder t_stringbuilder = new System.Text.StringBuilder(1024);
 			for(int ii=0;ii<this.decvalue.Count;ii++){
-				BlueBack.VariableDigit.BusyConvert.ToStringBuilder(this.decvalue[ii],t_stringbuilder);
-				UnityEngine.Debug.Log(t_stringbuilder.ToString());
+				BlueBack.VariableDigit.BusyConvert.ToStringBuilderWithLimit(this.decvalue[ii],t_stringbuilder,1000);
+				UnityEngine.Debug.Log(string.Format("{0}",t_stringbuilder));
 			}
 
 			yield break;

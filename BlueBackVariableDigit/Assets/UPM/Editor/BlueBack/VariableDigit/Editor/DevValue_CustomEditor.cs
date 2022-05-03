@@ -92,9 +92,9 @@ namespace BlueBack.VariableDigit.Editor
 			if(a_decvalue == null){
 				 UnityEditor.EditorGUILayout.LabelField("null");
 			}else{
-				string t_name = string.Format("{0} : exponent = {1} : count = {2}",(a_decvalue.sign > 0) ? ('+') : ('-'),a_decvalue.exponent,a_decvalue.list.Count);
+				string t_name = string.Format("{0} : exponent = {1} : count = {2}",(a_decvalue.sign > 0) ? ('+') : ('-'),a_decvalue.exponent,a_decvalue.mantissa.Count);
 
-				System.Collections.Generic.LinkedListNode<int> t_node = a_decvalue.list.First;
+				System.Collections.Generic.LinkedListNode<int> t_node = a_decvalue.mantissa.First;
 				if(this.SetExpanded(a_address,UnityEditor.EditorGUILayout.Foldout(this.GetExpanded(a_address),t_name)) == true){
 					UnityEditor.EditorGUI.indentLevel++;
 

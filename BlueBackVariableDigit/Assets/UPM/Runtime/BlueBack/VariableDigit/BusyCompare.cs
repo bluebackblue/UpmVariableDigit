@@ -30,8 +30,8 @@ namespace BlueBack.VariableDigit
 				return -1;
 			}
 			
-			System.Collections.Generic.LinkedListNode<int> t_node_1 = a_1.list.First;
-			System.Collections.Generic.LinkedListNode<int> t_node_2 = a_2.list.First;
+			System.Collections.Generic.LinkedListNode<int> t_node_1 = a_1.mantissa.First;
+			System.Collections.Generic.LinkedListNode<int> t_node_2 = a_2.mantissa.First;
 
 			do{
 				int t_1_value = (t_node_1 != null) ? (t_node_1.Value) : 0;
