@@ -121,7 +121,15 @@ namespace BlueBack.VariableDigit
 			sbyte t_sign = (sbyte)(a_1.sign * a_2.sign);
 
 			//exponent
-			long t_exponent = a_1.exponent - a_2.exponent;
+			long t_exponent = a_1.exponent - a_2.exponent + a_2.mantissa.Count - 1;
+
+			//正規化。
+			{
+				while((t_result.Count > 1)&&(t_result.First.Value == 0)){
+					t_result.RemoveFirst();
+					t_exponent--;
+				}
+			}
 
 			return new DecValue(t_sign,t_exponent,t_result);
 		}

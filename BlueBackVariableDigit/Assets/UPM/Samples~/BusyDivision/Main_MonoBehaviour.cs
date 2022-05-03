@@ -19,11 +19,21 @@ namespace BlueBack.VariableDigit.Samples.BusyDivision
 		{
 			this.decvalue = new System.Collections.Generic.List<BlueBack.VariableDigit.DecValue>(){
 
-				//0 + 0 = 0
-				BlueBack.VariableDigit.BusyDivision.DivisionWithLimit(BlueBack.VariableDigit.BusyConvert.ToDecValue("0"),			BlueBack.VariableDigit.BusyConvert.ToDecValue("0"),			100),
+				//1 / 16 = 0.0625
+				BlueBack.VariableDigit.BusyDivision.DivisionWithLimit(BlueBack.VariableDigit.BusyConvert.ToDecValue("1"),				BlueBack.VariableDigit.BusyConvert.ToDecValue("16"),		100),
 
-				//0 + 0 = 0
-				BlueBack.VariableDigit.BusyDivision.DivisionWithLimit(BlueBack.VariableDigit.BusyConvert.ToDecValue("1"),			BlueBack.VariableDigit.BusyConvert.ToDecValue("16"),		100),
+				//0.00023 / 0.00032112 = 0.7162431489785749875***
+				BlueBack.VariableDigit.BusyDivision.DivisionWithLimit(BlueBack.VariableDigit.BusyConvert.ToDecValue("0.00023"),			BlueBack.VariableDigit.BusyConvert.ToDecValue("0.00032112"),	100),
+
+				//12345.12345 / 0.00032112 = 38443956.93198804185351***
+				BlueBack.VariableDigit.BusyDivision.DivisionWithLimit(BlueBack.VariableDigit.BusyConvert.ToDecValue("12345.12345"),		BlueBack.VariableDigit.BusyConvert.ToDecValue("0.00032112"),	100),
+
+				//0.00023 / 12345.12345 = 0.0000000186308383979748699***
+				BlueBack.VariableDigit.BusyDivision.DivisionWithLimit(BlueBack.VariableDigit.BusyConvert.ToDecValue("0.00023"),			BlueBack.VariableDigit.BusyConvert.ToDecValue("12345.12345"),	100),
+
+				//12345.12345 / 1234.1234 = 10.003151589217091256***
+				BlueBack.VariableDigit.BusyDivision.DivisionWithLimit(BlueBack.VariableDigit.BusyConvert.ToDecValue("12345.12345"),		BlueBack.VariableDigit.BusyConvert.ToDecValue("1234.1234"),	100),
+
 
 			};
 		}

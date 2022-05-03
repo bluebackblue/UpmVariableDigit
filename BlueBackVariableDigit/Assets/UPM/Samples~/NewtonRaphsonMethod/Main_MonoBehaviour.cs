@@ -34,23 +34,23 @@ namespace BlueBack.VariableDigit.Samples.NewtonRaphsonMethod
 		
 		/** CoroutineMain
 
-			ニュートン・ラフソン法で[1 / 987654321]を求める。
+			ニュートンラフソン法で[1 / 987654321]を求める。
 
 		*/
 		private System.Collections.IEnumerator CoroutineMain()
 		{
-			DecValue t_value = BlueBack.VariableDigit.BusyConvert.ToDecValue("987654321");
+			BlueBack.VariableDigit.DecValue t_value = BlueBack.VariableDigit.BusyConvert.ToDecValue("987654321");
 
 			//初期値。
-			DecValue t_value_inv = DecValue.value_1;
+			BlueBack.VariableDigit.DecValue t_value_inv = BlueBack.VariableDigit.DecValue.value_1;
 
-			for(int ii=0;ii<15;ii++){
+			for(int ii=0;ii<20;ii++){
 				{
 					UnityEngine.Debug.Log(string.Format("count : {0}",ii));
 				}
 
 				//vxn = V * X(n)
-				DecValue t_vxn = BlueBack.VariableDigit.BusyMultiply.Multiply(t_value,t_value_inv);
+				BlueBack.VariableDigit.DecValue t_vxn = BlueBack.VariableDigit.BusyMultiply.Multiply(t_value,t_value_inv);
 
 				{
 					System.Text.StringBuilder t_stringbuilder = new System.Text.StringBuilder(1024);
@@ -60,12 +60,12 @@ namespace BlueBack.VariableDigit.Samples.NewtonRaphsonMethod
 				}
 
 				if(t_vxn.exponent >= 0){
-					t_value_inv = BlueBack.VariableDigit.BusyMultiply.Multiply(t_value_inv,DecValue.value_16_inverse);
+					t_value_inv = BlueBack.VariableDigit.BusyMultiply.Multiply(t_value_inv,BlueBack.VariableDigit.DecValue.value_16_inverse);
 					continue;
 				}
 
 				//2_vxn = 2 - (V * X(n))
-				DecValue t_2_vxn = BlueBack.VariableDigit.BusySubtraction.Subtraction(DecValue.value_2,t_vxn);
+				BlueBack.VariableDigit.DecValue t_2_vxn = BlueBack.VariableDigit.BusySubtraction.Subtraction(BlueBack.VariableDigit.DecValue.value_2,t_vxn);
 
 				//X(n+1) = N(n) * (2 - (V * X(n)))
 				t_value_inv = BlueBack.VariableDigit.BusyMultiply.Multiply(t_value_inv,t_2_vxn);
@@ -79,6 +79,14 @@ namespace BlueBack.VariableDigit.Samples.NewtonRaphsonMethod
 					UnityEngine.Debug.Log(string.Format("value_inv = {0}",t_stringbuilder));
 					yield return null;
 				}
+			}
+
+			{
+				t_value_inv = BlueBack.VariableDigit.BusyDivision.DivisionWithLimit(BlueBack.VariableDigit.DecValue.value_1,t_value,100);
+				System.Text.StringBuilder t_stringbuilder = new System.Text.StringBuilder(1024);
+				BlueBack.VariableDigit.BusyConvert.ToStringBuilderWithLimit(t_value_inv,t_stringbuilder,1000);
+				UnityEngine.Debug.Log(string.Format("BusyDivision : value_inv = {0}",t_stringbuilder));
+				yield return null;
 			}
 
 			yield break;
