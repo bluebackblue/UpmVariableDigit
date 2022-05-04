@@ -37,6 +37,8 @@ namespace BlueBack.VariableDigit
 		private enum Value_1{ID=0};
 		private enum Value_2{ID=0};
 		private enum Value_2_Inverse{ID=0};
+		private enum Value_4{ID=0};
+		private enum Value_4_Inverse{ID=0};
 		private enum Value_16{ID=0};
 		private enum Value_16_Inverse{ID=0};
 
@@ -45,7 +47,9 @@ namespace BlueBack.VariableDigit
 		public static readonly DecValue value_0 = new DecValue();
 		public static readonly DecValue value_1 = new DecValue(Value_1.ID);
 		public static readonly DecValue value_2 = new DecValue(Value_2.ID);
-		public static readonly DecValue value_2_inverse = new DecValue(Value_2.ID);
+		public static readonly DecValue value_2_inverse = new DecValue(Value_2_Inverse.ID);
+		public static readonly DecValue value_4 = new DecValue(Value_4.ID);
+		public static readonly DecValue value_4_inverse = new DecValue(Value_4_Inverse.ID);
 		public static readonly DecValue value_16 = new DecValue(Value_16.ID);
 		public static readonly DecValue value_16_inverse = new DecValue(Value_16_Inverse.ID);
 
@@ -121,6 +125,36 @@ namespace BlueBack.VariableDigit
 			//mantissa
 			this.mantissa = new System.Collections.Generic.LinkedList<int>();
 			this.mantissa.AddLast(50);
+		}
+
+		/** constructor
+		*/
+		private DecValue(Value_4 a_value)
+		{
+			//sign
+			this.sign = 1;
+
+			//exponent
+			this.exponent = 0;
+
+			//mantissa
+			this.mantissa = new System.Collections.Generic.LinkedList<int>();
+			this.mantissa.AddLast(4);
+		}
+
+		/** constructor
+		*/
+		private DecValue(Value_4_Inverse a_value)
+		{
+			//sign
+			this.sign = 1;
+
+			//exponent
+			this.exponent = -1;
+
+			//mantissa
+			this.mantissa = new System.Collections.Generic.LinkedList<int>();
+			this.mantissa.AddLast(25);
 		}
 
 		/** constructor

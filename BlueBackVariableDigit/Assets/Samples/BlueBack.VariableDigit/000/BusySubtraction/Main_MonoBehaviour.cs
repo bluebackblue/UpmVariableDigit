@@ -31,14 +31,14 @@ namespace BlueBack.VariableDigit.Samples.BusySubtraction
 				//0 - -1 = 1
 				BlueBack.VariableDigit.BusySubtraction.Subtraction(BlueBack.VariableDigit.BusyConvert.ToDecValue("0"),			BlueBack.VariableDigit.BusyConvert.ToDecValue("-1")),
 
-				//10 - 0 = 10
-				BlueBack.VariableDigit.BusySubtraction.Subtraction(BlueBack.VariableDigit.BusyConvert.ToDecValue("10"),			BlueBack.VariableDigit.BusyConvert.ToDecValue("0")),
-				//0 - 10 = -10
-				BlueBack.VariableDigit.BusySubtraction.Subtraction(BlueBack.VariableDigit.BusyConvert.ToDecValue("0"),			BlueBack.VariableDigit.BusyConvert.ToDecValue("10")),
-				//-10 - 0 = -10
-				BlueBack.VariableDigit.BusySubtraction.Subtraction(BlueBack.VariableDigit.BusyConvert.ToDecValue("-10"),		BlueBack.VariableDigit.BusyConvert.ToDecValue("0")),
-				//0 - -10 = 10
-				BlueBack.VariableDigit.BusySubtraction.Subtraction(BlueBack.VariableDigit.BusyConvert.ToDecValue("0"),			BlueBack.VariableDigit.BusyConvert.ToDecValue("-10")),
+				//0.125 - 0 = 0.125
+				BlueBack.VariableDigit.BusySubtraction.Subtraction(BlueBack.VariableDigit.BusyConvert.ToDecValue("0.125"),		BlueBack.VariableDigit.BusyConvert.ToDecValue("0")),
+				//0 - 0.125 = -0.125
+				BlueBack.VariableDigit.BusySubtraction.Subtraction(BlueBack.VariableDigit.BusyConvert.ToDecValue("0"),			BlueBack.VariableDigit.BusyConvert.ToDecValue("0.125")),
+				//-0.125 - 0 = -0.125
+				BlueBack.VariableDigit.BusySubtraction.Subtraction(BlueBack.VariableDigit.BusyConvert.ToDecValue("-0.125"),		BlueBack.VariableDigit.BusyConvert.ToDecValue("0")),
+				//0 - -0.125 = 0.125
+				BlueBack.VariableDigit.BusySubtraction.Subtraction(BlueBack.VariableDigit.BusyConvert.ToDecValue("0"),			BlueBack.VariableDigit.BusyConvert.ToDecValue("-0.125")),
 
 				//100 - 0 = 100
 				BlueBack.VariableDigit.BusySubtraction.Subtraction(BlueBack.VariableDigit.BusyConvert.ToDecValue("100"),		BlueBack.VariableDigit.BusyConvert.ToDecValue("0")),
