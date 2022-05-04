@@ -11,20 +11,21 @@ namespace BlueBack.VariableDigit.Samples.Simple
 	{
 		/** decvalue
 		*/
-		public System.Collections.Generic.List<BlueBack.VariableDigit.DecValue> decvalue;
+		public System.Collections.Generic.List<DecValue> decvalue;
 
 		/** Awake
 		*/
 		private void Awake()
 		{
-			this.decvalue = new System.Collections.Generic.List<BlueBack.VariableDigit.DecValue>(){
-
-				BlueBack.VariableDigit.DecValue.value_0,
-				BlueBack.VariableDigit.DecValue.value_1,
-				BlueBack.VariableDigit.DecValue.value_2,
-				BlueBack.VariableDigit.DecValue.value_2_inverse,
-				BlueBack.VariableDigit.DecValue.value_16,
-				BlueBack.VariableDigit.DecValue.value_16_inverse,
+			this.decvalue = new System.Collections.Generic.List<DecValue>(){
+				DecValue.value_0,
+				DecValue.value_1,
+				DecValue.value_2,
+				DecValue.value_2_inverse,
+				DecValue.value_4,
+				DecValue.value_4_inverse,
+				DecValue.value_16,
+				DecValue.value_16_inverse,
 			};
 		}
 
@@ -33,7 +34,7 @@ namespace BlueBack.VariableDigit.Samples.Simple
 		private void Start()
 		{
 			#if(UNITY_EDITOR)
-			this.gameObject.AddComponent<BlueBack.VariableDigit.InspectorViewer_MonoBehaviour>().decvalue = this.decvalue;
+			this.gameObject.AddComponent<InspectorViewer_MonoBehaviour>().decvalue = this.decvalue;
 			#endif
 
 			//CoroutineMain
@@ -46,7 +47,8 @@ namespace BlueBack.VariableDigit.Samples.Simple
 		{
 			System.Text.StringBuilder t_stringbuilder = new System.Text.StringBuilder(1024);
 			for(int ii=0;ii<this.decvalue.Count;ii++){
-				BlueBack.VariableDigit.BusyConvert.ToStringBuilderWithLimit(this.decvalue[ii],t_stringbuilder,1000);
+				t_stringbuilder.Clear();
+				BusyConvert.AddToStringBuilder(this.decvalue[ii],t_stringbuilder,1000);
 				UnityEngine.Debug.Log(string.Format("{0}",t_stringbuilder));
 			}
 

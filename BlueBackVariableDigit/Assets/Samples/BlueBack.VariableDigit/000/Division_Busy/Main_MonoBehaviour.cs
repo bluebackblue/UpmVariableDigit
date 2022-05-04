@@ -1,9 +1,9 @@
 
 
-/** BlueBack.VariableDigit.Samples.Simple
+/** Samples.Division_Busy
 */
 #if(!DEF_BLUEBACK_VARIABLEDIGIT_SAMPLES_DISABLE)
-namespace BlueBack.VariableDigit.Samples.Simple
+namespace BlueBack.VariableDigit.Samples.Division_Busy
 {
 	/** Main_MonoBehaviour
 	*/
@@ -18,14 +18,22 @@ namespace BlueBack.VariableDigit.Samples.Simple
 		private void Awake()
 		{
 			this.decvalue = new System.Collections.Generic.List<DecValue>(){
-				DecValue.value_0,
-				DecValue.value_1,
-				DecValue.value_2,
-				DecValue.value_2_inverse,
-				DecValue.value_4,
-				DecValue.value_4_inverse,
-				DecValue.value_16,
-				DecValue.value_16_inverse,
+
+				//0.0625
+				BusyDivision.Division(BusyConvert.ToDecValue("1"),					BusyConvert.ToDecValue("16"),				100),
+
+				//0.7162431489785749875***
+				BusyDivision.Division(BusyConvert.ToDecValue("0.00023"),			BusyConvert.ToDecValue("0.00032112"),		100),
+
+				//38443956.931988041853***
+				BusyDivision.Division(BusyConvert.ToDecValue("12345.12345"),		BusyConvert.ToDecValue("0.00032112"),		100),
+
+				//0.0000000186308383979***
+				BusyDivision.Division(BusyConvert.ToDecValue("0.00023"),			BusyConvert.ToDecValue("12345.12345"),		100),
+
+				//10.003151589217091256***
+				BusyDivision.Division(BusyConvert.ToDecValue("12345.12345"),		BusyConvert.ToDecValue("1234.1234"),		100),
+
 			};
 		}
 

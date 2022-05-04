@@ -15,9 +15,9 @@ namespace BlueBack.VariableDigit
 	*/
 	public static class BusyDivision
 	{
-		/** Compare
+		/** Inner_Compare
 		*/
-		private static int Compare(System.Collections.Generic.LinkedList<int> a_1,System.Collections.Generic.LinkedList<int> a_2)
+		private static int Inner_Compare(System.Collections.Generic.LinkedList<int> a_1,System.Collections.Generic.LinkedList<int> a_2)
 		{
 			System.Collections.Generic.LinkedListNode<int> t_node_1 = a_1.First;
 			System.Collections.Generic.LinkedListNode<int> t_node_2 = a_2.First;
@@ -43,41 +43,46 @@ namespace BlueBack.VariableDigit
 			}
 		}
 
-		/** DivisionWithLimit
+		/** Division
 		*/
-		public static DecValue DivisionWithLimit(DecValue a_1,DecValue a_2,int a_limit)
+		public static DecValue Division(DecValue a_1,DecValue a_2,int a_limit_loop)
 		{
+			//ゼロ。
+			if((a_2.mantissa.Count == 1)&&(a_2.mantissa.First.Value == 0)){
+				return DecValue.value_0;
+			}
+
 			//div
 			System.Collections.Generic.LinkedList<int> t_div = a_2.mantissa;
 
 			//mod
 			System.Collections.Generic.LinkedList<int> t_mod = new System.Collections.Generic.LinkedList<int>();
-			System.Collections.Generic.LinkedListNode<int> t_a1_node = a_1.mantissa.First;
-			t_mod.AddLast(t_a1_node.Value);
-			t_a1_node = t_a1_node.Next;
+			System.Collections.Generic.LinkedListNode<int> t_1_node = a_1.mantissa.First;
+			t_mod.AddLast(t_1_node.Value);
+			t_1_node = t_1_node.Next;
 
 			//result
 			System.Collections.Generic.LinkedList<int> t_result = new System.Collections.Generic.LinkedList<int>();
 			t_result.AddLast(0);
 
-			int t_limit = a_limit;
+			int t_limit_loop = a_limit_loop;
 
 			do{
-				int t_sub = Compare(t_mod,t_div);
+				int t_sub = Inner_Compare(t_mod,t_div);
 				if(t_sub < 0){
 					//足りない。
 
-					t_limit--;
-					if(t_limit < 0){
+					t_limit_loop--;
+					if(t_limit_loop < 0){
 						break;
 					}
 
-					if(t_a1_node != null){
-						t_mod.AddLast(t_a1_node.Value);
-						t_a1_node = t_a1_node.Next;
+					if(t_1_node != null){
+						t_mod.AddLast(t_1_node.Value);
+						t_1_node = t_1_node.Next;
 					}else{
 						if(t_mod.Count == 0){
-							//割りけれた。
+							//割り切れた。
 							break;
 						}else{
 							t_mod.AddLast(0);

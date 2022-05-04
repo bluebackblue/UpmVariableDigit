@@ -1,9 +1,9 @@
 
 
-/** BlueBack.VariableDigit.Samples.Simple
+/** BlueBack.VariableDigit.Samples.Inverse_Busy
 */
 #if(!DEF_BLUEBACK_VARIABLEDIGIT_SAMPLES_DISABLE)
-namespace BlueBack.VariableDigit.Samples.Simple
+namespace BlueBack.VariableDigit.Samples.Inverse_Busy
 {
 	/** Main_MonoBehaviour
 	*/
@@ -18,14 +18,16 @@ namespace BlueBack.VariableDigit.Samples.Simple
 		private void Awake()
 		{
 			this.decvalue = new System.Collections.Generic.List<DecValue>(){
-				DecValue.value_0,
-				DecValue.value_1,
-				DecValue.value_2,
-				DecValue.value_2_inverse,
-				DecValue.value_4,
-				DecValue.value_4_inverse,
-				DecValue.value_16,
-				DecValue.value_16_inverse,
+			
+				//0.00000000101249999998734375000015820312499802246
+				BusyInverse.Inverse(BusyConvert.ToDecValue("987654321"),100,100),
+			
+				//0.0999999999999999999999999999999999999999
+				BusyInverse.Inverse(BusyConvert.ToDecValue("10"),100,100),
+
+				//0.0999999999999999999999999999999999999999
+				BusyInverse.Inverse(BusyConvert.ToDecValue("2"),100,100),
+
 			};
 		}
 
@@ -40,7 +42,7 @@ namespace BlueBack.VariableDigit.Samples.Simple
 			//CoroutineMain
 			this.StartCoroutine(this.CoroutineMain());
 		}
-
+		
 		/** CoroutineMain
 		*/
 		private System.Collections.IEnumerator CoroutineMain()

@@ -15,106 +15,116 @@ namespace BlueBack.VariableDigit
 	*/
 	public static class BusyConvert
 	{
-		/** [DecValue]を[StringBuilder]にコンバート。
+		/** ToString
 		*/
-		public static void ToStringBuilderWithLimit(DecValue a_value,System.Text.StringBuilder a_out_stringbuffer,int a_limit)
+		public static string ToString(DecValue a_value,int a_limit)
 		{
-			a_out_stringbuffer.Clear();
-			{
-				switch(a_value.sign){
-				case -1:
-					{
-						a_out_stringbuffer.Append('-');
-					}break;
-				}
+			System.Text.StringBuilder t_stringbuffer = new System.Text.StringBuilder();
+			AddToStringBuilder(a_value,t_stringbuffer,a_limit);
+			return t_stringbuffer.ToString();
+		}
 
-				System.Collections.Generic.LinkedListNode<int> t_node = a_value.mantissa.First;
+		/** [StringBuilder]に追加。
+		*/
+		public static void AddToStringBuilder(DecValue a_value,System.Text.StringBuilder a_out_stringbuffer,int a_limit)
+		{
+			int t_limit = a_limit;
+
+			switch(a_value.sign){
+			case -1:
+				{
+					a_out_stringbuffer.Append('-');
+				}break;
+			}
+
+			System.Collections.Generic.LinkedListNode<int> t_node = a_value.mantissa.First;
 				
-				long t_exponent = a_value.exponent;
-				if(t_exponent >= 0){
-					//整数部あり。
-					{
-						int t_value = t_node.Value;
-						a_out_stringbuffer.Append(t_value);
-						t_node = t_node.Next;
-						t_exponent--;
-					}
-
-					while(t_exponent >= 0){
-						if(t_node != null){
-							int t_value = t_node.Value;
-							if(t_value < 10){
-								a_out_stringbuffer.Append('0');
-								a_out_stringbuffer.Append(t_value);
-							}else{
-								a_out_stringbuffer.Append(t_value);
-							}
-
-							t_node = t_node.Next;
-						}else{
-							//ゼロ埋め。
-							a_out_stringbuffer.Append("00");
-						}
-
-						//リミット。
-						if(a_out_stringbuffer.Length > a_limit){
-							a_out_stringbuffer.Append("***");
-							return;
-						}
-
-						t_exponent--;
-					}
-
-					//小数部もあり。
-					if(t_node != null){
-						a_out_stringbuffer.Append(".");
-					}
-				}else{
-					//整数部なし。
-					a_out_stringbuffer.Append("0.");
+			long t_exponent = a_value.exponent;
+			if(t_exponent >= 0){
+				//整数部あり。
+				{
+					int t_value = t_node.Value;
+					a_out_stringbuffer.Append(t_value);
+					t_node = t_node.Next;
+					t_exponent--;
 				}
 
-				//小数部。
-				if(t_node != null){
-
-					//ゼロ埋め。
-					while(t_exponent < -1){
-						a_out_stringbuffer.Append("00");
-						t_exponent++;
-					}
-
-					while(t_node != null){
+				while(t_exponent >= 0){
+					if(t_node != null){
 						int t_value = t_node.Value;
-						if(t_node == a_value.mantissa.Last){
-							if(t_value < 10){
-								a_out_stringbuffer.Append('0');
-								a_out_stringbuffer.Append(t_value);
-							}else{
-								int t_value_div10 = t_value / 10;
-								if(t_value != (t_value_div10 * 10)){
-									a_out_stringbuffer.Append(t_value);
-								}else{
-									//小数部最後の下位１桁が０の場合は省略する。
-									a_out_stringbuffer.Append(t_value_div10);
-								}
-							}
+						if(t_value < 10){
+							a_out_stringbuffer.Append('0');
+							a_out_stringbuffer.Append(t_value);
 						}else{
-							if(t_value < 10){
-								a_out_stringbuffer.Append('0');
-								a_out_stringbuffer.Append(t_value);
-							}else{
-								a_out_stringbuffer.Append(t_value);
-							}
-						}
-
-						//リミット。
-						if(a_out_stringbuffer.Length > a_limit){
-							a_out_stringbuffer.Append("***");
-							return;
+							a_out_stringbuffer.Append(t_value);
 						}
 
 						t_node = t_node.Next;
+					}else{
+						//ゼロ埋め。
+						a_out_stringbuffer.Append("00");
 					}
+
+					//リミット。
+					t_limit--;
+					if(t_limit <= 0){
+						a_out_stringbuffer.Append("***");
+						return;
+					}
+
+					t_exponent--;
+				}
+
+				//小数部もあり。
+				if(t_node != null){
+					a_out_stringbuffer.Append(".");
+				}
+			}else{
+				//整数部なし。
+				a_out_stringbuffer.Append("0.");
+			}
+
+			//小数部。
+			if(t_node != null){
+
+				//ゼロ埋め。
+				while(t_exponent < -1){
+					a_out_stringbuffer.Append("00");
+					t_exponent++;
+				}
+
+				while(t_node != null){
+					int t_value = t_node.Value;
+					if(t_node == a_value.mantissa.Last){
+						if(t_value < 10){
+							a_out_stringbuffer.Append('0');
+							a_out_stringbuffer.Append(t_value);
+						}else{
+							int t_value_div10 = t_value / 10;
+							if(t_value != (t_value_div10 * 10)){
+								a_out_stringbuffer.Append(t_value);
+							}else{
+								//小数部最後の下位１桁が０の場合は省略する。
+								a_out_stringbuffer.Append(t_value_div10);
+							}
+						}
+					}else{
+						if(t_value < 10){
+							a_out_stringbuffer.Append('0');
+							a_out_stringbuffer.Append(t_value);
+						}else{
+							a_out_stringbuffer.Append(t_value);
+						}
+					}
+
+					//リミット。
+					t_limit--;
+					if(t_limit <= 0){
+						a_out_stringbuffer.Append("***");
+						return;
+					}
+
+					t_node = t_node.Next;
 				}
 			}
 		}
@@ -364,9 +374,9 @@ namespace BlueBack.VariableDigit
 
 			{
 				double t_pow100exponent = System.Math.Pow(100,a_value.exponent);
-								System.Collections.Generic.LinkedListNode<int> t_node = a_value.mantissa.First;
+				System.Collections.Generic.LinkedListNode<int> t_node = a_value.mantissa.First;
 				for(int ii=0;((ii<a_limit)&&(t_node != null));ii++){
-					t_result += t_pow100exponent;
+					t_result += t_pow100exponent * t_node.Value;
 					t_pow100exponent *= 0.01d;
 					t_node = t_node.Next;
 				}
