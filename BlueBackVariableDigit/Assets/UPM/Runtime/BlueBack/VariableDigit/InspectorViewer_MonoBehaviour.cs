@@ -15,10 +15,10 @@ namespace BlueBack.VariableDigit
 	*/
 	public class InspectorViewer_MonoBehaviour : UnityEngine.MonoBehaviour
 	{
-		/** decvalue
+		/** editor_view_list
 		*/
 		#if(UNITY_EDITOR)
-		public System.Collections.Generic.List<BlueBack.VariableDigit.DecValue> decvalue;
+		public System.Collections.Generic.List<BlueBack.VariableDigit.DecValue> editor_view_list;
 		#endif
 	}
 }

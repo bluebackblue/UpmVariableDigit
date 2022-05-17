@@ -61,10 +61,11 @@ namespace BlueBack.VariableDigit.Editor
 
 			UnityEditor.EditorGUILayout.Space(18);
 
-			if(t_this.decvalue != null){
-				int ii_max = t_this.decvalue.Count;
+			System.Collections.Generic.List<BlueBack.VariableDigit.DecValue> t_editor_view_list = t_this.editor_view_list;
+			if(t_editor_view_list != null){
+				int ii_max = t_editor_view_list.Count;
 				for(int ii=0;ii<ii_max;ii++){
-					this.Draw(ii.ToString(),t_this.decvalue[ii]);
+					this.Draw(ii.ToString(),t_editor_view_list[ii]);
 					UnityEditor.EditorGUILayout.Space(18);
 				}
 			}

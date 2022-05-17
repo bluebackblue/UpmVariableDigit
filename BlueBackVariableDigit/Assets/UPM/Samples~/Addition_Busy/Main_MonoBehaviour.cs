@@ -7,7 +7,7 @@ namespace BlueBack.VariableDigit.Samples.Addition_Busy
 {
 	/** Main_MonoBehaviour
 	*/
-	public class Main_MonoBehaviour : UnityEngine.MonoBehaviour
+	public class Main_MonoBehaviour : InspectorViewer_MonoBehaviour
 	{
 		/** decvalue
 		*/
@@ -64,7 +64,7 @@ namespace BlueBack.VariableDigit.Samples.Addition_Busy
 		private void Start()
 		{
 			#if(UNITY_EDITOR)
-			this.gameObject.AddComponent<InspectorViewer_MonoBehaviour>().decvalue = this.decvalue;
+			this.editor_view_list = this.decvalue;
 			#endif
 
 			//CoroutineMain

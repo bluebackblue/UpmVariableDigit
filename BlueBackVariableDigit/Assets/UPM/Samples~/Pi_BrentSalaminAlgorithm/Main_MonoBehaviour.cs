@@ -7,10 +7,10 @@ namespace BlueBack.VariableDigit.Samples.Pi_BrentSalaminAlgorithm
 {
 	/** Main_MonoBehaviour
 
-		 The Square AGM: by E.Salamin and R.P.Breant
+		 AGM
 
 	*/
-	public class Main_MonoBehaviour : UnityEngine.MonoBehaviour
+	public class Main_MonoBehaviour : InspectorViewer_MonoBehaviour
 	{
 		/** decvalue
 		*/
@@ -28,7 +28,7 @@ namespace BlueBack.VariableDigit.Samples.Pi_BrentSalaminAlgorithm
 		private void Start()
 		{
 			#if(UNITY_EDITOR)
-			this.gameObject.AddComponent<InspectorViewer_MonoBehaviour>().decvalue = this.decvalue;
+			this.editor_view_list = this.decvalue;
 			#endif
 
 			//CoroutineMain
@@ -92,25 +92,22 @@ namespace BlueBack.VariableDigit.Samples.Pi_BrentSalaminAlgorithm
 				t_t = t_new_t;
 				t_p = t_new_p;
 
-				UnityEngine.Debug.Log(string.Format("{0} {1} {2} {3}",t_a.mantissa.Count,t_b.mantissa.Count,t_t.mantissa.Count,t_p.mantissa.Count));
-
 				t_a.CutMantissa(111);
 				t_b.CutMantissa(111);
 				t_t.CutMantissa(111);
 				t_p.CutMantissa(111);
 
 				{
-					DecValue t_ab = BusyAddition.Addition(t_a,t_b);
-					DecValue t_ab_2 = BusyMultiply.Multiply(t_ab,t_ab);
-					DecValue t_ab_2_quarter = BusyMultiply.Multiply(t_ab_2,DecValue.value_4_inverse);
-
-					DecValue t_pi = BusyDivision.Division(t_ab_2_quarter,t_t,1000);
+					DecValue t_result = BusyAddition.Addition(t_a,t_b);
+					t_result = BusyMultiply.Multiply(t_result,t_result);
+					t_result = BusyMultiply.Multiply(t_result,DecValue.value_4_inverse);
+					t_result = BusyDivision.Division(t_result,t_t,1000);
 
 					{
 						System.Text.StringBuilder t_stringbuilder = new System.Text.StringBuilder();
 						{
 							t_stringbuilder.Append("\npi = ");
-							BusyConvert.AddToStringBuilder(t_pi,t_stringbuilder,100);
+							BusyConvert.AddToStringBuilder(t_result,t_stringbuilder,100);
 						}
 
 						UnityEngine.Debug.Log(string.Format("{0}:{1}",nn,t_stringbuilder));
