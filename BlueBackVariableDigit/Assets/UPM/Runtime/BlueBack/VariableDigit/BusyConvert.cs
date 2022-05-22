@@ -38,7 +38,7 @@ namespace BlueBack.VariableDigit
 			}
 
 			System.Collections.Generic.LinkedListNode<int> t_node = a_value.mantissa.First;
-				
+
 			long t_exponent = a_value.exponent;
 			if(t_exponent >= 0){
 				//整数部あり。
@@ -358,7 +358,7 @@ namespace BlueBack.VariableDigit
 		public static DecValue ToDecValue(double a_value)
 		{
 			ulong t_bit = System.BitConverter.ToUInt64(System.BitConverter.GetBytes(a_value),0);
-			
+
 			DecValue t_value = ToDecValue(((t_bit & 0x8000000000000000UL) == 0) ? (sbyte)1 : (sbyte)-1,(t_bit & 0x000FFFFFFFFFFFFFUL) | 0x0010000000000000UL);
 			long t_exponent = ((long)((t_bit & 0x7FF0000000000000UL) >> 52)) - 1075;
 			DecValue t_pow2exponent = (t_exponent > 0) ? (BusyPow.Pow(DecValue.value_2,(ulong)t_exponent)) : (BusyPow.Pow(DecValue.value_2_inverse,(ulong)-t_exponent));

@@ -36,7 +36,7 @@ namespace BlueBack.VariableDigit.Samples.Sqrt_Busy
 			//CoroutineMain
 			this.StartCoroutine(this.CoroutineMain());
 		}
-		
+
 		/** CoroutineMain
 
 			ニュートンラフソン法で[sqrt(2)]を求める。

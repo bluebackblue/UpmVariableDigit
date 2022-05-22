@@ -31,7 +31,7 @@ namespace BlueBack.VariableDigit.Samples.Convert_HexToDec
 			//CoroutineMain
 			this.StartCoroutine(this.CoroutineMain());
 		}
-		
+
 		/** CoroutineMain
 		*/
 		private System.Collections.IEnumerator CoroutineMain()
@@ -55,7 +55,7 @@ namespace BlueBack.VariableDigit.Samples.Convert_HexToDec
 			do{
 				//t_dec_add = H(n) * digitscale
 				DecValue t_dec_add = BusyMultiply.Multiply(BusyConvert.ToDecValue(t_hex_node.Value),t_digitscale);
-				
+
 				//result += t_dec_add
 				t_result = BusyAddition.Addition(t_result,t_dec_add);
 

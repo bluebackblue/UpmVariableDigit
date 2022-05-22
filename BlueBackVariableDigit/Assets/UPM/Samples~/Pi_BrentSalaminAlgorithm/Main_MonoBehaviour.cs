@@ -7,7 +7,7 @@ namespace BlueBack.VariableDigit.Samples.Pi_BrentSalaminAlgorithm
 {
 	/** Main_MonoBehaviour
 
-		 AGM
+		AGM
 
 	*/
 	public class Main_MonoBehaviour : InspectorViewer_MonoBehaviour
@@ -34,7 +34,7 @@ namespace BlueBack.VariableDigit.Samples.Pi_BrentSalaminAlgorithm
 			//CoroutineMain
 			this.StartCoroutine(this.CoroutineMain());
 		}
-		
+
 		/** CoroutineMain
 		*/
 		private System.Collections.IEnumerator CoroutineMain()

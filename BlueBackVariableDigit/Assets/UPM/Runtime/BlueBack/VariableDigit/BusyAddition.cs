@@ -35,7 +35,7 @@ namespace BlueBack.VariableDigit
 			}else if(a_1.exponent < a_2.exponent){
 				return -1;
 			}
-			
+
 			System.Collections.Generic.LinkedListNode<int> t_node_1 = a_1.mantissa.First;
 			System.Collections.Generic.LinkedListNode<int> t_node_2 = a_2.mantissa.First;
 

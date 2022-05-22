@@ -42,7 +42,7 @@ namespace BlueBack.VariableDigit
 						t_result.AddLast(0);
 					}
 				}
-			
+
 				System.Collections.Generic.LinkedListNode<int> t_result_node_base = t_result.Last;
 
 				System.Collections.Generic.LinkedListNode<int> t_node_2 = a_2.mantissa.Last;

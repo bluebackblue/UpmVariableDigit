@@ -18,10 +18,10 @@ namespace BlueBack.VariableDigit.Samples.Inverse_Busy
 		private void Awake()
 		{
 			this.decvalue = new System.Collections.Generic.List<DecValue>(){
-			
+
 				//0.00000000101249999998734375000015820312499802246
 				BusyInverse.Inverse(BusyConvert.ToDecValue("987654321"),100,100),
-			
+
 				//0.0999999999999999999999999999999999999999
 				BusyInverse.Inverse(BusyConvert.ToDecValue("10"),100,100),
 
@@ -42,7 +42,7 @@ namespace BlueBack.VariableDigit.Samples.Inverse_Busy
 			//CoroutineMain
 			this.StartCoroutine(this.CoroutineMain());
 		}
-		
+
 		/** CoroutineMain
 		*/
 		private System.Collections.IEnumerator CoroutineMain()

@@ -28,7 +28,7 @@ namespace BlueBack.VariableDigit.Editor
 			if(this.expanded == null){
 				this.expanded = new System.Collections.Generic.Dictionary<string,bool>();
 			}
-		
+
 			if(this.expanded.ContainsKey(a_address) == true){
 				return this.expanded[a_address];
 			}else{
@@ -91,7 +91,7 @@ namespace BlueBack.VariableDigit.Editor
 		public void Draw(string a_address,BlueBack.VariableDigit.DecValue a_decvalue)
 		{
 			if(a_decvalue == null){
-				 UnityEditor.EditorGUILayout.LabelField("null");
+					UnityEditor.EditorGUILayout.LabelField("null");
 			}else{
 				string t_name = string.Format("{0} : exponent = {1} : count = {2}",(a_decvalue.sign > 0) ? ('+') : ('-'),a_decvalue.exponent,a_decvalue.mantissa.Count);
 

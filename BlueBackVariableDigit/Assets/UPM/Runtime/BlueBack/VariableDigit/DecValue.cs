@@ -25,9 +25,9 @@ namespace BlueBack.VariableDigit
 
 		/** 仮数。
 
-			 [AA,BB,CC,*,*,*] : AA.BBCC***
+			[AA,BB,CC,*,*,*] : AA.BBCC***
 
-			 数値 : sign * pow(100,exponent) * AA.BBCC***
+			数値 : sign * pow(100,exponent) * AA.BBCC***
 
 		*/
 		public System.Collections.Generic.LinkedList<int> mantissa;
