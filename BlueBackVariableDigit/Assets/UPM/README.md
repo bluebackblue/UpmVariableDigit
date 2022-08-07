@@ -2,6 +2,7 @@
 可変桁浮動小数点数
 * 四則演算
 
+
 ## ライセンス
 MIT License
 * https://github.com/bluebackblue/UpmVariableDigit/blob/main/LICENSE
@@ -18,7 +19,7 @@ Unity 2022.1.0b16
 
 ## UPM
 ### 最新
-* https://github.com/bluebackblue/UpmVariableDigit.git?path=BlueBackVariableDigit/Assets/UPM#0.0.5
+* https://github.com/bluebackblue/UpmVariableDigit.git?path=BlueBackVariableDigit/Assets/UPM#0.0.6
 ### 開発
 * https://github.com/bluebackblue/UpmVariableDigit.git?path=BlueBackVariableDigit/Assets/UPM
 

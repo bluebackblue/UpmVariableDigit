@@ -342,7 +342,7 @@ namespace BlueBack.VariableDigit
 				}break;
 			default:
 				{
-					#if(DEF_BLUEBACK_VARIABLEDIGIT_ASSERT)
+					#if(DEF_BLUEBACK_ASSERT)
 					DebugTool.Assert(false,string.Format("sign = {0}",a_sign));
 					#endif
 

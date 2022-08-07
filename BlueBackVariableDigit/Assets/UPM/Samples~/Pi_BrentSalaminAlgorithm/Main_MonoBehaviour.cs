@@ -10,7 +10,7 @@ namespace BlueBack.VariableDigit.Samples.Pi_BrentSalaminAlgorithm
 		AGM
 
 	*/
-	public class Main_MonoBehaviour : InspectorViewer_MonoBehaviour
+	public sealed class Main_MonoBehaviour : InspectorViewer_MonoBehaviour
 	{
 		/** decvalue
 		*/

@@ -13,7 +13,7 @@ namespace BlueBack.VariableDigit
 {
 	/** InspectorViewer_MonoBehaviour
 	*/
-	public class InspectorViewer_MonoBehaviour : UnityEngine.MonoBehaviour
+	public /*abstract*/ class InspectorViewer_MonoBehaviour : UnityEngine.MonoBehaviour
 	{
 		/** editor_view_list
 		*/

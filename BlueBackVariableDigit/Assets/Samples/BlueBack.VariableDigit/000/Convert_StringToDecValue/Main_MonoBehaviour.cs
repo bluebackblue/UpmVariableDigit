@@ -7,7 +7,7 @@ namespace BlueBack.VariableDigit.Samples.Convert_StringToDecValue
 {
 	/** Main_MonoBehaviour
 	*/
-	public class Main_MonoBehaviour : InspectorViewer_MonoBehaviour
+	public sealed class Main_MonoBehaviour : InspectorViewer_MonoBehaviour
 	{
 		/** decvalue
 		*/

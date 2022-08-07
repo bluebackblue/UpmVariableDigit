@@ -8,6 +8,7 @@
 	"discription_detal":[
 		"可変桁浮動小数点数",
 		"* 四則演算",
+		""
 	],
 	"keyword":[
 		"math"
