@@ -192,7 +192,7 @@ namespace BlueBack.VariableDigit
 		*/
 		public DecValue(sbyte a_sign,long a_exponent,int[] a_list)
 		{
-			#if(DEF_BLUEBACK_ASSERT)
+			#if(DEF_BLUEBACK_DEBUG_ASSERT)
 			DebugTool.Assert((a_sign == 1)||(a_sign == -1),"error:sign");
 			#endif
 
@@ -210,7 +210,7 @@ namespace BlueBack.VariableDigit
 		*/
 		public DecValue(sbyte a_sign,long a_exponent,System.Collections.Generic.LinkedList<int> a_list)
 		{
-			#if(DEF_BLUEBACK_ASSERT)
+			#if(DEF_BLUEBACK_DEBUG_ASSERT)
 			DebugTool.Assert((a_sign == 1)||(a_sign == -1),"error:sign");
 			#endif
 
